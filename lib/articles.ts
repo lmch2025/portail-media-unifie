@@ -10,6 +10,7 @@ export interface ArticleIndexItem {
   publishedAt: string;
   readTime: string;
   wordCount: number;
+  featuredImage?: string;
   affiliateType?: 'amazon_us' | 'amazon_fr' | 'hostinger' | 'whatsapp_cm' | 'stay22' | 'casino' | null;
   author: {
     name: string;

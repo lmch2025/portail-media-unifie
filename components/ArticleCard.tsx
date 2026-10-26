@@ -7,8 +7,23 @@ export default function ArticleCard({ article }: { article: Article | ArticleInd
   const isEn = article.lang === "en" || article.categorySlug === "espresso-cafe";
 
   return (
-    <article className="group bg-white rounded-2xl border border-slate-200 hover:border-blue-400 p-6 transition-all duration-200 hover:shadow-xl flex flex-col justify-between">
+    <article className="group bg-white rounded-2xl border border-slate-200 hover:border-blue-400 p-5 transition-all duration-200 hover:shadow-xl flex flex-col justify-between overflow-hidden">
       <div className="space-y-3">
+        {/* Featured Image Thumbnail */}
+        {article.featuredImage && (
+          <Link
+            href={`/${article.categorySlug}/${article.slug}`}
+            className="block relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-100"
+          >
+            <img
+              src={article.featuredImage}
+              alt={article.title}
+              loading="lazy"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          </Link>
+        )}
+
         {/* Category & Read Time */}
         <div className="flex items-center justify-between text-xs">
           {category && (

@@ -49,6 +49,16 @@ export function generateMetadata({ params }: Props): Metadata {
       authors: [article.author.name],
       section: category.name,
       siteName: "Kidenzo Media",
+      images: article.featuredImage
+        ? [
+            {
+              url: article.featuredImage,
+              width: 1200,
+              height: 630,
+              alt: article.title,
+            },
+          ]
+        : undefined,
     },
   };
 }
@@ -89,6 +99,7 @@ export default function ArticlePage({ params }: Props) {
         "headline": article.title,
         "description": article.description,
         "inLanguage": isEn ? "en-US" : "fr-FR",
+        "image": article.featuredImage ? [article.featuredImage] : undefined,
         "datePublished": article.publishedAt,
         "dateModified": article.updatedAt || article.publishedAt,
         "author": {
@@ -234,6 +245,23 @@ export default function ArticlePage({ params }: Props) {
             </div>
           </div>
         </header>
+
+        {/* Hero Product / Topic Image */}
+        {article.featuredImage && (
+          <figure className="my-6 rounded-2xl overflow-hidden border border-slate-200/80 shadow-md bg-slate-100">
+            <img
+              src={article.featuredImage}
+              alt={article.title}
+              className="w-full max-h-[480px] object-cover"
+              loading="eager"
+            />
+            <figcaption className="text-xs text-center text-slate-500 py-2.5 px-4 bg-slate-50 border-t border-slate-200/60 font-medium">
+              {isEn
+                ? `Verified reference & lab test: ${article.title}`
+                : `Illustration vérifiée : ${article.title}`}
+            </figcaption>
+          </figure>
+        )}
 
         {/* AIO Direct Answer Box: 30-Second Summary + Official Link Bullet */}
         <section
