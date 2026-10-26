@@ -706,9 +706,6 @@ export default function ArticlePage({ params }: Props) {
               ? "Hands-On Lab Observations and Field Notes"
               : "Observations et retours d'expérience sur le terrain"
           }
-              ? "Hands-On Lab Observations and Field Notes"
-              : "Observations et retours d'expérience sur le terrain"
-          }
           className="my-10 rounded-2xl bg-slate-900 text-white p-6 sm:p-8 shadow-xl border border-slate-800 space-y-4"
         >
           <div className="flex items-center space-x-2 text-emerald-400 font-bold text-base">
