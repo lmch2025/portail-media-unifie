@@ -1,0 +1,40 @@
+import { MetadataRoute } from "next";
+import { CATEGORIES } from "@/lib/categories";
+import { getAllArticles } from "@/lib/articles";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = "https://portail-unifie.com";
+
+  // Home route
+  const routes: MetadataRoute.Sitemap = [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 1.0,
+    },
+  ];
+
+  // 33 Category hubs
+  for (const cat of CATEGORIES) {
+    routes.push({
+      url: `${baseUrl}/${cat.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.9,
+    });
+  }
+
+  // Articles routes
+  const articles = getAllArticles();
+  for (const art of articles) {
+    routes.push({
+      url: `${baseUrl}/${art.categorySlug}/${art.slug}`,
+      lastModified: new Date(art.publishedAt),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    });
+  }
+
+  return routes;
+}
