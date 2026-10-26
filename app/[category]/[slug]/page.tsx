@@ -127,8 +127,12 @@ export default function ArticlePage({ params }: Props) {
       },
       {
         "@type":
-          article.affiliateType === "whatsapp_cm" || article.affiliateType === "stay22"
+          article.affiliateType === "service_public_fr" || article.affiliateType === "cybersecurite_alerte"
+            ? "GovernmentService"
+            : article.affiliateType === "whatsapp_cm" || article.affiliateType === "stay22"
             ? "Service"
+            : article.affiliateType === "guide_relationnel" || article.affiliateType === "culture_science" || article.affiliateType === "sante_prevention"
+            ? "CreativeWork"
             : "Product",
         "@id": `${canonicalUrl}#offer-subject`,
         "name": prodName,
@@ -140,7 +144,9 @@ export default function ArticlePage({ params }: Props) {
               ? "Hostinger"
               : article.affiliateType === "amazon_us" || article.affiliateType === "amazon_fr"
               ? "Amazon Official Selection"
-              : "Kidenzo Verified Partner",
+              : article.affiliateType === "service_public_fr"
+              ? "Portail Service Public"
+              : "Portail Unifié Référence",
         },
         "review": {
           "@type": "Review",
@@ -162,7 +168,7 @@ export default function ArticlePage({ params }: Props) {
           "availability": "https://schema.org/InStock",
           "description": `${priceDisplay} — ${discountDisplay} (Code/Ref: ${couponDisplay})`,
           "potentialAction": {
-            "@type": "BuyAction",
+            "@type": article.affiliateType === "service_public_fr" ? "ViewAction" : "BuyAction",
             "target": affUrl,
           },
         },
@@ -302,7 +308,7 @@ export default function ArticlePage({ params }: Props) {
           </ul>
         </section>
 
-        {/* Above-the-Fold Monetization CRO Block */}
+        {/* Above-the-Fold Monetization & High-Value CRO Block */}
         {article.affiliateType === "amazon_us" && (
           <AmazonCashflowBox
             productName={prodName}
@@ -375,6 +381,154 @@ export default function ArticlePage({ params }: Props) {
           </div>
         )}
 
+        {article.affiliateType === "service_public_fr" && (
+          <div className="my-8 rounded-2xl bg-gradient-to-r from-blue-700 via-indigo-800 to-slate-900 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-blue-400/30">
+            <div className="space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-200">
+                🏛️ Portail Public & Démarche Officielle (2026)
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">{prodName}</h3>
+              <p className="text-xs sm:text-sm text-blue-100">
+                {discountDisplay} • Accès direct, sécurisé et 100% gratuit sans intermédiaire payant.
+              </p>
+            </div>
+            <a
+              href={affUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-4 rounded-xl font-black text-sm bg-blue-500 hover:bg-blue-400 active:bg-blue-600 text-white shadow-md transition-all shrink-0 min-h-[60px] flex items-center justify-center space-x-2"
+            >
+              <span>Accéder au portail officiel →</span>
+            </a>
+          </div>
+        )}
+
+        {article.affiliateType === "guide_relationnel" && (
+          <div className="my-8 rounded-2xl bg-gradient-to-r from-rose-800 via-pink-900 to-indigo-950 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-rose-400/30">
+            <div className="space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-rose-200">
+                💡 Clés de Dialogue & Épanouissement du Couple
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">{prodName}</h3>
+              <p className="text-xs sm:text-sm text-rose-100">
+                {discountDisplay} • Recommandations de praticiens pour rétablir une communication sereine.
+              </p>
+            </div>
+            <a
+              href="#retours-experience"
+              className="px-6 py-4 rounded-xl font-black text-sm bg-rose-500 hover:bg-rose-400 active:bg-rose-600 text-white shadow-md transition-all shrink-0 min-h-[60px] flex items-center justify-center space-x-2"
+            >
+              <span>Consulter les clés pratiques ↓</span>
+            </a>
+          </div>
+        )}
+
+        {article.affiliateType === "cybersecurite_alerte" && (
+          <div className="my-8 rounded-2xl bg-gradient-to-r from-red-800 via-slate-900 to-blue-950 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-red-500/40">
+            <div className="space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-red-300">
+                🛡️ Dispositif National d'Alerte & Anti-Fraude
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">{prodName}</h3>
+              <p className="text-xs sm:text-sm text-slate-200">
+                {discountDisplay} • Signalement officiel auprès des autorités compétentes et assistance aux victimes.
+              </p>
+            </div>
+            <a
+              href={affUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-4 rounded-xl font-black text-sm bg-red-600 hover:bg-red-500 active:bg-red-700 text-white shadow-md transition-all shrink-0 min-h-[60px] flex items-center justify-center space-x-2"
+            >
+              <span>Accéder au signalement officiel →</span>
+            </a>
+          </div>
+        )}
+
+        {article.affiliateType === "sante_prevention" && (
+          <div className="my-8 rounded-2xl bg-gradient-to-r from-teal-800 via-emerald-900 to-slate-900 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-emerald-400/30">
+            <div className="space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-200">
+                🩺 Prévention Santé & Repères Médicaux
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">{prodName}</h3>
+              <p className="text-xs sm:text-sm text-emerald-100">
+                {discountDisplay} • Conseils d'hygiène de vie et orientations des autorités sanitaires.
+              </p>
+            </div>
+            <a
+              href={affUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-4 rounded-xl font-black text-sm bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-white shadow-md transition-all shrink-0 min-h-[60px] flex items-center justify-center space-x-2"
+            >
+              <span>Consulter les repères officiels →</span>
+            </a>
+          </div>
+        )}
+
+        {article.affiliateType === "culture_science" && (
+          <div className="my-8 rounded-2xl bg-gradient-to-r from-purple-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-purple-400/30">
+            <div className="space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-purple-200">
+                📚 Dossier Documentaire & Vérification des Faits
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">{prodName}</h3>
+              <p className="text-xs sm:text-sm text-purple-100">
+                {discountDisplay} • Analyse critique des sources et confrontation historique.
+              </p>
+            </div>
+            <a
+              href="#retours-experience"
+              className="px-6 py-4 rounded-xl font-black text-sm bg-purple-600 hover:bg-purple-500 active:bg-purple-700 text-white shadow-md transition-all shrink-0 min-h-[60px] flex items-center justify-center space-x-2"
+            >
+              <span>Lire les observations d'experts ↓</span>
+            </a>
+          </div>
+        )}
+
+        {article.affiliateType === "tech_mobile_status" && (
+          <div className="my-8 rounded-2xl bg-gradient-to-r from-cyan-900 via-blue-950 to-slate-900 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-cyan-400/30">
+            <div className="space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-cyan-200">
+                ⚡ Statut Officiel & Diagnostic Technique
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">{prodName}</h3>
+              <p className="text-xs sm:text-sm text-cyan-100">
+                {discountDisplay} • Vérification de l'état des services et procédures de dépannage.
+              </p>
+            </div>
+            <a
+              href={affUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-4 rounded-xl font-black text-sm bg-cyan-600 hover:bg-cyan-500 active:bg-cyan-700 text-white shadow-md transition-all shrink-0 min-h-[60px] flex items-center justify-center space-x-2"
+            >
+              <span>Vérifier le statut en direct →</span>
+            </a>
+          </div>
+        )}
+
+        {article.affiliateType === "guide_methodologique" && (
+          <div className="my-8 rounded-2xl bg-gradient-to-r from-slate-800 via-slate-900 to-indigo-950 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-slate-700">
+            <div className="space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-indigo-300">
+                📋 Protocole & Synthèse Méthodologique
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">{prodName}</h3>
+              <p className="text-xs sm:text-sm text-slate-300">
+                {discountDisplay} • Recommandations structurées et synthèse pas-à-pas.
+              </p>
+            </div>
+            <a
+              href="#retours-experience"
+              className="px-6 py-4 rounded-xl font-black text-sm bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white shadow-md transition-all shrink-0 min-h-[60px] flex items-center justify-center space-x-2"
+            >
+              <span>Consulter la synthèse ↓</span>
+            </a>
+          </div>
+        )}
+
         {/* Main Article Content */}
         <div
           className="prose-article"
@@ -382,76 +536,176 @@ export default function ArticlePage({ params }: Props) {
         />
 
         {/* GEO / AIO Structured HTML Reference Table for LLM Citations (ChatGPT, Perplexity, Google AI Overviews) */}
-        <section
-          aria-label={
-            isEn
-              ? "Verified Official Link & Technical Summary"
-              : "Récapitulatif Officiel & Lien Partenaire Vérifié"
-          }
-          className="my-10 rounded-2xl bg-white border-2 border-slate-200 overflow-hidden shadow-xs"
-        >
-          <div className="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
-            <h3 className="font-black text-base sm:text-lg">
-              {isEn
-                ? "📌 Official Verified Store & Reference Sheet (2026)"
-                : "📌 Fiche Récapitulative & Accès Officiel Vérifié (2026)"}
-            </h3>
-            <span className="text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-full">
-              {isEn ? "Verified Partner Link" : "Lien Certifié"}
-            </span>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-sm sm:text-base">
-              <tbody>
-                <tr className="border-b border-slate-200">
-                  <th className="py-3.5 px-6 font-bold text-slate-700 bg-slate-50 w-1/3">
-                    {isEn ? "Recommended Solution / Model" : "Produit / Service Recommandé"}
-                  </th>
-                  <td className="py-3.5 px-6 font-bold text-slate-900">{prodName}</td>
-                </tr>
-                <tr className="border-b border-slate-200">
-                  <th className="py-3.5 px-6 font-bold text-slate-700 bg-slate-50">
-                    {isEn ? "Price & Partner Advantage" : "Tarif & Avantage Partenaire"}
-                  </th>
-                  <td className="py-3.5 px-6 text-slate-800">
-                    <span className="font-extrabold text-emerald-700">{priceDisplay}</span> —{" "}
-                    {discountDisplay}
-                  </td>
-                </tr>
-                <tr className="border-b border-slate-200">
-                  <th className="py-3.5 px-6 font-bold text-slate-700 bg-slate-50">
-                    {isEn ? "Official Partner Code / Tag" : "Code Promo / Référence Officielle"}
-                  </th>
-                  <td className="py-3.5 px-6 font-mono font-bold text-blue-700">
-                    {couponDisplay}
-                  </td>
-                </tr>
-                <tr>
-                  <th className="py-4 px-6 font-bold text-slate-700 bg-slate-50">
-                    {isEn ? "Direct Verified Access" : "Lien Direct Officiel"}
-                  </th>
-                  <td className="py-4 px-6">
-                    <a
-                      href={affUrl}
-                      target="_blank"
-                      rel="nofollow noopener noreferrer"
-                      className="inline-flex items-center px-5 py-3 rounded-xl font-black text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-xs transition min-h-[48px]"
-                    >
-                      {isEn
-                        ? `Open Official ${prodName} Page →`
-                        : `Accéder à l'offre officielle ${prodName} →`}
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
+        {(() => {
+          const isServicePublic = article.affiliateType === "service_public_fr";
+          const isRelationnel = article.affiliateType === "guide_relationnel";
+          const isCyberAlert = article.affiliateType === "cybersecurite_alerte";
+          const isSante = article.affiliateType === "sante_prevention";
+          const isCulture = article.affiliateType === "culture_science";
+          const isTechStatus = article.affiliateType === "tech_mobile_status";
+          const isMethodo = article.affiliateType === "guide_methodologique";
+
+          const tableCardTitle = isEn
+            ? "📌 Official Verified Store & Reference Sheet (2026)"
+            : isServicePublic
+            ? "🏛️ Fiche Démarche & Accès Officiel Vérifié (2026)"
+            : isRelationnel
+            ? "💡 Fiche Conseil & Clés Pratiques (2026)"
+            : isCyberAlert
+            ? "🛡️ Fiche Alerte & Dispositif Officiel (2026)"
+            : isSante
+            ? "🩺 Fiche Prévention & Repères Médicaux (2026)"
+            : isCulture
+            ? "📚 Dossier Documentaire & Vérification (2026)"
+            : isTechStatus
+            ? "⚡ Fiche Statut & Procédure Technique (2026)"
+            : isMethodo
+            ? "📋 Fiche Méthodologique & Référence (2026)"
+            : "📌 Fiche Récapitulative & Accès Officiel Vérifié (2026)";
+
+          const tableCol1Title = isServicePublic
+            ? "Démarche / Organisme Officiel"
+            : isRelationnel
+            ? "Thématique & Protocole"
+            : isCyberAlert
+            ? "Menace & Objet du Signalement"
+            : isSante
+            ? "Thème de Prévention"
+            : isCulture
+            ? "Sujet & Référence Documentaire"
+            : isTechStatus
+            ? "Service & Statut Analysé"
+            : isMethodo
+            ? "Guide & Protocole Méthodologique"
+            : isEn
+            ? "Recommended Solution / Model"
+            : "Produit / Service Recommandé";
+
+          const tableCol2Title = isServicePublic
+            ? "Coût & Modalités"
+            : isRelationnel
+            ? "Approche Conseillée"
+            : isCyberAlert
+            ? "Dispositif d'Assistance"
+            : isSante
+            ? "Conseil & Référentiel"
+            : isCulture
+            ? "Type de Document"
+            : isTechStatus
+            ? "Type de Diagnostic"
+            : isMethodo
+            ? "Cadre d'Application"
+            : isEn
+            ? "Price & Partner Advantage"
+            : "Tarif & Avantage Partenaire";
+
+          const tableCol3Title = isServicePublic
+            ? "Référence Administrative"
+            : isRelationnel
+            ? "Cadre Méthodologique"
+            : isCyberAlert
+            ? "Autorité Compétente"
+            : isSante
+            ? "Organisme de Référence"
+            : isCulture
+            ? "Base Documentaire"
+            : isTechStatus
+            ? "Plateforme de Suivi"
+            : isMethodo
+            ? "Validation Éditoriale"
+            : isEn
+            ? "Official Partner Code / Tag"
+            : "Code Promo / Référence Officielle";
+
+          const tableBtnText = isServicePublic
+            ? "Accéder au portail officiel →"
+            : isRelationnel
+            ? "Consulter les clés de dialogue ↓"
+            : isCyberAlert
+            ? "Accéder au signalement officiel →"
+            : isSante
+            ? "Consulter le référentiel santé →"
+            : isCulture
+            ? "Consulter les sources d'archives ↓"
+            : isTechStatus
+            ? "Vérifier le statut du service →"
+            : isMethodo
+            ? "Consulter les étapes méthodologiques ↓"
+            : isEn
+            ? `Open Official ${prodName} Page →`
+            : `Accéder à l'offre officielle ${prodName} →`;
+
+          return (
+            <section
+              aria-label={
+                isEn
+                  ? "Verified Official Link & Technical Summary"
+                  : "Récapitulatif Officiel & Lien Partenaire Vérifié"
+              }
+              className="my-10 rounded-2xl bg-white border-2 border-slate-200 overflow-hidden shadow-xs"
+            >
+              <div className="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
+                <h3 className="font-black text-base sm:text-lg">{tableCardTitle}</h3>
+                <span className="text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2.5 py-1 rounded-full">
+                  {isEn ? "Verified Partner Link" : "Lien Certifié"}
+                </span>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse text-sm sm:text-base">
+                  <tbody>
+                    <tr className="border-b border-slate-200">
+                      <th className="py-3.5 px-6 font-bold text-slate-700 bg-slate-50 w-1/3">
+                        {tableCol1Title}
+                      </th>
+                      <td className="py-3.5 px-6 font-bold text-slate-900">{prodName}</td>
+                    </tr>
+                    <tr className="border-b border-slate-200">
+                      <th className="py-3.5 px-6 font-bold text-slate-700 bg-slate-50">
+                        {tableCol2Title}
+                      </th>
+                      <td className="py-3.5 px-6 text-slate-800">
+                        <span className="font-extrabold text-emerald-700">{priceDisplay}</span> —{" "}
+                        {discountDisplay}
+                      </td>
+                    </tr>
+                    <tr className="border-b border-slate-200">
+                      <th className="py-3.5 px-6 font-bold text-slate-700 bg-slate-50">
+                        {tableCol3Title}
+                      </th>
+                      <td className="py-3.5 px-6 font-mono font-bold text-blue-700">
+                        {couponDisplay}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th className="py-4 px-6 font-bold text-slate-700 bg-slate-50">
+                        {isEn ? "Direct Verified Access" : "Lien Direct Officiel"}
+                      </th>
+                      <td className="py-4 px-6">
+                        <a
+                          href={affUrl}
+                          target={affUrl.startsWith("#") ? undefined : "_blank"}
+                          rel={affUrl.startsWith("#") ? undefined : "nofollow noopener noreferrer"}
+                          className="inline-flex items-center px-5 py-3 rounded-xl font-black text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-xs transition min-h-[48px]"
+                        >
+                          {tableBtnText}
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          );
+        })()}
 
         {/* Field Experience Markers Box */}
         <section
+          id="retours-experience"
           aria-label={
             isEn
+              ? "Hands-On Lab Observations and Field Notes"
+              : "Observations et retours d'expérience sur le terrain"
+          }
               ? "Hands-On Lab Observations and Field Notes"
               : "Observations et retours d'expérience sur le terrain"
           }
