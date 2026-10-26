@@ -13,18 +13,21 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Portail Unifié Média",
-    default: "Portail Unifié Média | Guides Officiels, Concours, Énergie & Tech",
+    template: "%s | Kidenzo Media",
+    default: "Kidenzo Media | Guides Officiels, Concours, Énergie Solaire & Comparatifs Tech",
   },
-  description: "Portail de référence pour les concours administratifs au Cameroun, démarches, tarifs Eneo/Camwater, énergie solaire, comparatifs tech et guides pratiques officiels.",
-  metadataBase: new URL("https://portail-unifie.com"),
+  description:
+    "Portail éditorial de référence : concours administratifs au Cameroun, démarches officielles, tarifs Eneo/Camwater, énergie solaire, hébergement Cloud et tests d'équipements tech & espresso.",
+  metadataBase: new URL("https://kidenzo.store"),
   alternates: {
-    canonical: "/",
+    canonical: "https://kidenzo.store",
   },
   openGraph: {
-    title: "Portail Unifié Média | Guides Officiels, Concours, Énergie & Tech",
-    description: "Portail de référence pour les concours administratifs au Cameroun, démarches, tarifs Eneo/Camwater, énergie solaire, comparatifs tech et guides pratiques officiels.",
-    siteName: "Portail Unifié Média",
+    title: "Kidenzo Media | Guides Officiels, Concours, Énergie Solaire & Comparatifs Tech",
+    description:
+      "Portail éditorial de référence : concours administratifs au Cameroun, démarches officielles, tarifs Eneo/Camwater, énergie solaire, hébergement Cloud et tests d'équipements tech & espresso.",
+    url: "https://kidenzo.store",
+    siteName: "Kidenzo Media",
     locale: "fr_FR",
     type: "website",
   },

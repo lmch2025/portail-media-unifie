@@ -6,6 +6,8 @@ import ArticleCard from "@/components/ArticleCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import HostingerBanner from "@/components/HostingerBanner";
 
+const SITE_URL = "https://kidenzo.store";
+
 interface Props {
   params: { category: string };
 }
@@ -20,16 +22,29 @@ export function generateMetadata({ params }: Props): Metadata {
   const category = getCategoryBySlug(params.category);
   if (!category) return {};
 
+  const isEn = category.slug === "espresso-cafe";
+  const canonicalUrl = `${SITE_URL}/${category.slug}`;
+
   return {
-    title: `${category.name} | Guides et Actualités Officiels`,
-    description: category.description,
+    title: isEn
+      ? "Espresso Machines & Specialty Coffee Lab | Kidenzo Media"
+      : `${category.name} | Guides et Actualités Officiels`,
+    description: isEn
+      ? "In-depth espresso machine reviews, conical and flat burr grinder tests, extraction science, and verified Amazon US deals."
+      : category.description,
     alternates: {
-      canonical: `/${category.slug}`,
+      canonical: canonicalUrl,
     },
     openGraph: {
-      title: `${category.name} | Portail Unifié Média`,
-      description: category.description,
+      title: isEn
+        ? "Espresso Machines & Specialty Coffee Lab | Kidenzo Media"
+        : `${category.name} | Kidenzo Media`,
+      description: isEn
+        ? "In-depth espresso machine reviews, conical and flat burr grinder tests, extraction science, and verified Amazon US deals."
+        : category.description,
+      url: canonicalUrl,
       type: "website",
+      siteName: "Kidenzo Media",
     },
   };
 }
@@ -38,13 +53,17 @@ export default function CategoryPage({ params }: Props) {
   const category = getCategoryBySlug(params.category);
   if (!category) notFound();
 
+  const isEn = category.slug === "espresso-cafe";
   const articles = getArticlesByCategory(category.slug);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <div
+      lang={isEn ? "en" : "fr"}
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10"
+    >
       <Breadcrumbs
         items={[
-          { label: category.name }
+          { label: isEn ? "Espresso & Coffee Machines" : category.name },
         ]}
       />
 
@@ -56,13 +75,15 @@ export default function CategoryPage({ params }: Props) {
           </span>
           <div className="space-y-2">
             <span className="text-xs font-mono font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
-              Chemin officiel : /{category.slug}/
+              {isEn ? `Official Hub: /${category.slug}/` : `Chemin officiel : /${category.slug}/`}
             </span>
             <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-              {category.name}
+              {isEn ? "Espresso & Specialty Coffee Machines" : category.name}
             </h1>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
-              {category.description}
+              {isEn
+                ? "Hands-on espresso machine tests, burr grinder comparisons, extraction pressure benchmarks, and verified Amazon US equipment deals."
+                : category.description}
             </p>
           </div>
         </div>
@@ -75,10 +96,12 @@ export default function CategoryPage({ params }: Props) {
       <section className="space-y-6">
         <div className="flex items-center justify-between pb-3 border-b border-slate-200">
           <h2 className="text-xl font-black text-slate-900">
-            Derniers articles publiés ({articles.length})
+            {isEn
+              ? `Latest Lab Reviews & Guides (${articles.length})`
+              : `Derniers articles publiés (${articles.length})`}
           </h2>
           <span className="text-xs text-slate-500 font-medium">
-            Mises à jour quotidiennes
+            {isEn ? "Updated daily" : "Mises à jour quotidiennes"}
           </span>
         </div>
 
@@ -92,17 +115,29 @@ export default function CategoryPage({ params }: Props) {
           <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center space-y-3">
             <span className="text-4xl">📚</span>
             <h3 className="text-lg font-bold text-slate-800">
-              Articles en cours d'importation
+              {isEn ? "Articles synchronizing" : "Articles en cours d'importation"}
             </h3>
             <p className="text-sm text-slate-500 max-w-md mx-auto">
-              Les guides de cette rubrique sont en cours de synchronisation avec les archives officielles.
+              {isEn
+                ? "The guides for this section are currently syncing with our official archives."
+                : "Les guides de cette rubrique sont en cours de synchronisation avec les archives officielles."}
             </p>
           </div>
         )}
       </section>
 
       {/* Cameroon Lead Gen Callout for Specific Categories */}
-      {["concours", "tarifs-demarches", "emploi", "energie-solaire", "foncier-terrains", "immobilier-logement", "informatique-depannage", "automobile-mecanique", "douane-ports"].includes(category.slug) && (
+      {[
+        "concours",
+        "tarifs-demarches",
+        "emploi",
+        "energie-solaire",
+        "foncier-terrains",
+        "immobilier-logement",
+        "informatique-depannage",
+        "automobile-mecanique",
+        "douane-ports",
+      ].includes(category.slug) && (
         <section className="rounded-2xl bg-gradient-to-r from-emerald-800 to-teal-900 text-white p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-xl text-center sm:text-left">
             <span className="text-xs uppercase tracking-wider font-extrabold text-emerald-300">
@@ -120,7 +155,7 @@ export default function CategoryPage({ params }: Props) {
             href={`https://wa.me/237693845941?text=Bonjour,%20je%20vous%20contacte%20concernant%20la%20rubrique%20${category.slug}.`}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-4 rounded-xl font-black text-sm bg-white text-emerald-900 hover:bg-emerald-50 active:bg-emerald-100 shadow-md transition-all shrink-0 min-h-[54px] flex items-center justify-center space-x-2"
+            className="px-6 py-4 rounded-xl font-black text-sm bg-white text-emerald-900 hover:bg-emerald-50 active:bg-emerald-100 shadow-md transition-all shrink-0 min-h-[60px] flex items-center justify-center space-x-2"
           >
             <span>💬 Écrire sur WhatsApp</span>
           </a>

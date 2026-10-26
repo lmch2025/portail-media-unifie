@@ -3,7 +3,7 @@ import { CATEGORIES } from "@/lib/categories";
 import { getAllArticles } from "@/lib/articles";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://portail-unifie.com";
+  const baseUrl = "https://kidenzo.store";
 
   // Home route
   const routes: MetadataRoute.Sitemap = [
@@ -25,12 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  // Articles routes
+  // All 1,409+ Articles routes
   const articles = getAllArticles();
   for (const art of articles) {
     routes.push({
       url: `${baseUrl}/${art.categorySlug}/${art.slug}`,
-      lastModified: new Date(art.publishedAt),
+      lastModified: art.publishedAt ? new Date(art.publishedAt) : new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     });

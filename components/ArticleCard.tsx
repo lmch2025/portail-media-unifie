@@ -4,6 +4,7 @@ import { getCategoryBySlug } from "@/lib/categories";
 
 export default function ArticleCard({ article }: { article: Article | ArticleIndexItem }) {
   const category = getCategoryBySlug(article.categorySlug);
+  const isEn = article.lang === "en" || article.categorySlug === "espresso-cafe";
 
   return (
     <article className="group bg-white rounded-2xl border border-slate-200 hover:border-blue-400 p-6 transition-all duration-200 hover:shadow-xl flex flex-col justify-between">
@@ -16,7 +17,13 @@ export default function ArticleCard({ article }: { article: Article | ArticleInd
               className="inline-flex items-center space-x-1.5 font-bold px-3 py-1 rounded-full bg-blue-50 text-blue-700 hover:bg-blue-100 transition"
             >
               <span>{category.icon}</span>
-              <span>{category.name}</span>
+              <span>
+                {isEn && category.slug === "espresso-cafe"
+                  ? "Espresso & Coffee Lab"
+                  : isEn && category.slug === "gadgets-amazon"
+                  ? "Amazon Tech & Gadgets"
+                  : category.name}
+              </span>
             </Link>
           )}
           <span className="text-slate-400 font-medium">⏱️ {article.readTime}</span>
@@ -45,7 +52,9 @@ export default function ArticleCard({ article }: { article: Article | ArticleInd
           />
           <div className="flex flex-col">
             <span className="text-xs font-bold text-slate-800">{article.author.name}</span>
-            <span className="text-[10px] text-emerald-600 font-semibold">100% Certifié Humain</span>
+            <span className="text-[10px] text-emerald-600 font-semibold">
+              {isEn ? "100% Human Verified" : "100% Certifié Humain"}
+            </span>
           </div>
         </div>
 
@@ -53,7 +62,7 @@ export default function ArticleCard({ article }: { article: Article | ArticleInd
           href={`/${article.categorySlug}/${article.slug}`}
           className="text-xs font-black text-blue-600 group-hover:translate-x-1 transition-transform inline-flex items-center"
         >
-          Lire le guide →
+          {isEn ? "Read guide →" : "Lire le guide →"}
         </Link>
       </div>
     </article>

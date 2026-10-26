@@ -4,6 +4,7 @@ import path from "path";
 export interface ArticleIndexItem {
   slug: string;
   categorySlug: string;
+  lang?: 'fr' | 'en';
   title: string;
   description: string;
   publishedAt: string;
@@ -39,6 +40,7 @@ export interface Article extends ArticleIndexItem {
     discount?: string;
     rating?: number;
     pros?: string[];
+    aiCitationText?: string;
   };
 }
 
@@ -99,7 +101,6 @@ export function getArticleBySlug(categorySlug: string, slug: string): Article | 
 
 export function getFeaturedArticles(): ArticleIndexItem[] {
   const all = getAllArticles();
-  // Pick diverse high-value topics
   const priorityCategories = [
     "concours",
     "energie-solaire",
@@ -115,7 +116,6 @@ export function getFeaturedArticles(): ArticleIndexItem[] {
     if (found) picked.push(found);
   }
 
-  // Fill up to 6 with recent articles
   for (const a of all) {
     if (picked.length >= 6) break;
     if (!picked.some((p) => p.slug === a.slug)) {
