@@ -25,6 +25,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
+  // Institutional & Legal Pages (E-E-A-T)
+  const institutionalPages = [
+    "a-propos",
+    "mentions-legales",
+    "confidentialite",
+    "affiliation",
+    "contact",
+  ];
+  for (const page of institutionalPages) {
+    routes.push({
+      url: `${baseUrl}/${page}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    });
+  }
+
   // All 1,409+ Articles routes
   const articles = getAllArticles();
   for (const art of articles) {

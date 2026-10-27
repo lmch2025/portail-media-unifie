@@ -60,6 +60,14 @@ export function generateMetadata({ params }: Props): Metadata {
           ]
         : undefined,
     },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.description,
+      images: article.featuredImage ? [article.featuredImage] : undefined,
+      site: "@KidenzoMedia",
+      creator: "@KidenzoMedia",
+    },
   };
 }
 

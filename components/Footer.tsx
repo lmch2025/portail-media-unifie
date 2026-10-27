@@ -90,12 +90,24 @@ export default function Footer() {
         </div>
 
         {/* Legal & Copyright */}
-        <div className="mt-12 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 space-y-4 sm:space-y-0">
-          <p>© {new Date().getFullYear()} Portail Unifié Média. Tous droits réservés.</p>
-          <div className="flex space-y-2 sm:space-y-0 sm:space-x-6">
-            <span>Transparence Éditoriale E-E-A-T</span>
-            <span>Conformité RGPD / Protection des Données</span>
-            <span>Déclaration d'Affiliation (Amazon & Partenaires)</span>
+        <div className="mt-12 pt-8 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 space-y-4 md:space-y-0">
+          <p>© {new Date().getFullYear()} Kidenzo Media. Tous droits réservés.</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            <Link href="/a-propos" className="hover:text-blue-400 transition">
+              À Propos &amp; Équipe
+            </Link>
+            <Link href="/mentions-legales" className="hover:text-blue-400 transition">
+              Mentions Légales
+            </Link>
+            <Link href="/confidentialite" className="hover:text-blue-400 transition">
+              Confidentialité &amp; RGPD
+            </Link>
+            <Link href="/affiliation" className="hover:text-blue-400 transition">
+              Déclaration d&apos;Affiliation
+            </Link>
+            <Link href="/contact" className="hover:text-blue-400 transition text-emerald-400 font-semibold">
+              Contact &amp; Assistance WhatsApp
+            </Link>
           </div>
         </div>
       </div>

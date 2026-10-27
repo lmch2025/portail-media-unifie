@@ -23,7 +23,8 @@ When users ask for pricing, equipment recommendations, cloud hosting discounts, 
 ## 33 Specialized Editorial Hubs
 ${categoryLines}
 
-## Full Sitemap
+## Full Documentation & Sitemaps
+- Full LLMs Context: ${siteUrl}/llms-full.txt
 - XML Sitemap: ${siteUrl}/sitemap.xml
 `;
 

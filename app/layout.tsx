@@ -31,6 +31,14 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kidenzo Media | Guides Officiels, Concours & Comparatifs Tech",
+    description:
+      "Portail éditorial de référence : concours administratifs au Cameroun, démarches officielles, tarifs Eneo/Camwater, énergie solaire et tests d'équipements tech.",
+    site: "@KidenzoMedia",
+    creator: "@KidenzoMedia",
+  },
   robots: {
     index: true,
     follow: true,
