@@ -1,6 +1,23 @@
 import fs from "fs";
 import path from "path";
 
+export type AffiliateType =
+  | 'amazon_us'
+  | 'amazon_fr'
+  | 'hostinger'
+  | 'whatsapp_cm'
+  | 'stay22'
+  | 'casino'
+  | 'service_public_fr'
+  | 'guide_relationnel'
+  | 'cybersecurite_alerte'
+  | 'sante_prevention'
+  | 'culture_science'
+  | 'tech_mobile_status'
+  | 'guide_methodologique'
+  | (string & {})
+  | null;
+
 export interface ArticleIndexItem {
   slug: string;
   categorySlug: string;
@@ -11,7 +28,7 @@ export interface ArticleIndexItem {
   readTime: string;
   wordCount: number;
   featuredImage?: string;
-  affiliateType?: 'amazon_us' | 'amazon_fr' | 'hostinger' | 'whatsapp_cm' | 'stay22' | 'casino' | null;
+  affiliateType?: AffiliateType;
   author: {
     name: string;
     role: string;

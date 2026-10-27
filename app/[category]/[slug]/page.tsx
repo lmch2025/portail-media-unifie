@@ -88,6 +88,7 @@ export default function ArticlePage({ params }: Props) {
     (isEn ? "Free Prime Shipping & Official Warranty" : "Garantie Officielle & Livraison Rapide");
   const couponDisplay =
     affMeta.couponCode || (isEn ? "kidenzo202205-20" : "kidenzo202208-21");
+  const currentAffType = (article.affiliateType || "") as string;
 
   // Unified AIO / GEO Schema.org @graph (Article + Product/Offer/BuyAction + FAQPage)
   const aioGraphSchema = {
@@ -127,11 +128,11 @@ export default function ArticlePage({ params }: Props) {
       },
       {
         "@type":
-          article.affiliateType === "service_public_fr" || article.affiliateType === "cybersecurite_alerte"
+          currentAffType === "service_public_fr" || currentAffType === "cybersecurite_alerte"
             ? "GovernmentService"
-            : article.affiliateType === "whatsapp_cm" || article.affiliateType === "stay22"
+            : currentAffType === "whatsapp_cm" || currentAffType === "stay22"
             ? "Service"
-            : article.affiliateType === "guide_relationnel" || article.affiliateType === "culture_science" || article.affiliateType === "sante_prevention"
+            : currentAffType === "guide_relationnel" || currentAffType === "culture_science" || currentAffType === "sante_prevention"
             ? "CreativeWork"
             : "Product",
         "@id": `${canonicalUrl}#offer-subject`,
@@ -140,11 +141,11 @@ export default function ArticlePage({ params }: Props) {
         "brand": {
           "@type": "Brand",
           "name":
-            article.affiliateType === "hostinger"
+            currentAffType === "hostinger"
               ? "Hostinger"
-              : article.affiliateType === "amazon_us" || article.affiliateType === "amazon_fr"
+              : currentAffType === "amazon_us" || currentAffType === "amazon_fr"
               ? "Amazon Official Selection"
-              : article.affiliateType === "service_public_fr"
+              : currentAffType === "service_public_fr"
               ? "Portail Service Public"
               : "Portail Unifié Référence",
         },
@@ -168,7 +169,7 @@ export default function ArticlePage({ params }: Props) {
           "availability": "https://schema.org/InStock",
           "description": `${priceDisplay} — ${discountDisplay} (Code/Ref: ${couponDisplay})`,
           "potentialAction": {
-            "@type": article.affiliateType === "service_public_fr" ? "ViewAction" : "BuyAction",
+            "@type": currentAffType === "service_public_fr" ? "ViewAction" : "BuyAction",
             "target": affUrl,
           },
         },
@@ -309,7 +310,7 @@ export default function ArticlePage({ params }: Props) {
         </section>
 
         {/* Above-the-Fold Monetization & High-Value CRO Block */}
-        {article.affiliateType === "amazon_us" && (
+        {currentAffType === "amazon_us" && (
           <AmazonCashflowBox
             productName={prodName}
             price={affMeta.price}
@@ -320,7 +321,7 @@ export default function ArticlePage({ params }: Props) {
           />
         )}
 
-        {article.affiliateType === "amazon_fr" && (
+        {currentAffType === "amazon_fr" && (
           <AmazonCashflowBox
             productName={prodName}
             price={affMeta.price}
@@ -331,9 +332,9 @@ export default function ArticlePage({ params }: Props) {
           />
         )}
 
-        {article.affiliateType === "hostinger" && <HostingerBanner />}
+        {currentAffType === "hostinger" && <HostingerBanner />}
 
-        {(article.affiliateType === "whatsapp_cm" || article.affiliateType === "stay22") && (
+        {(currentAffType === "whatsapp_cm" || currentAffType === "stay22") && (
           <div className="my-8 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-emerald-200">
@@ -359,7 +360,7 @@ export default function ArticlePage({ params }: Props) {
           </div>
         )}
 
-        {article.affiliateType === "casino" && (
+        {currentAffType === "casino" && (
           <div className="my-8 rounded-2xl bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-purple-500/40">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-amber-300">
@@ -381,7 +382,7 @@ export default function ArticlePage({ params }: Props) {
           </div>
         )}
 
-        {article.affiliateType === "service_public_fr" && (
+        {currentAffType === "service_public_fr" && (
           <div className="my-8 rounded-2xl bg-gradient-to-r from-blue-700 via-indigo-800 to-slate-900 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-blue-400/30">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-blue-200">
@@ -403,7 +404,7 @@ export default function ArticlePage({ params }: Props) {
           </div>
         )}
 
-        {article.affiliateType === "guide_relationnel" && (
+        {currentAffType === "guide_relationnel" && (
           <div className="my-8 rounded-2xl bg-gradient-to-r from-rose-800 via-pink-900 to-indigo-950 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-rose-400/30">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-rose-200">
@@ -423,7 +424,7 @@ export default function ArticlePage({ params }: Props) {
           </div>
         )}
 
-        {article.affiliateType === "cybersecurite_alerte" && (
+        {currentAffType === "cybersecurite_alerte" && (
           <div className="my-8 rounded-2xl bg-gradient-to-r from-red-800 via-slate-900 to-blue-950 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-red-500/40">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-red-300">
@@ -445,7 +446,7 @@ export default function ArticlePage({ params }: Props) {
           </div>
         )}
 
-        {article.affiliateType === "sante_prevention" && (
+        {currentAffType === "sante_prevention" && (
           <div className="my-8 rounded-2xl bg-gradient-to-r from-teal-800 via-emerald-900 to-slate-900 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-emerald-400/30">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-emerald-200">
@@ -467,7 +468,7 @@ export default function ArticlePage({ params }: Props) {
           </div>
         )}
 
-        {article.affiliateType === "culture_science" && (
+        {currentAffType === "culture_science" && (
           <div className="my-8 rounded-2xl bg-gradient-to-r from-purple-900 via-indigo-950 to-slate-900 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-purple-400/30">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-purple-200">
@@ -487,7 +488,7 @@ export default function ArticlePage({ params }: Props) {
           </div>
         )}
 
-        {article.affiliateType === "tech_mobile_status" && (
+        {currentAffType === "tech_mobile_status" && (
           <div className="my-8 rounded-2xl bg-gradient-to-r from-cyan-900 via-blue-950 to-slate-900 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-cyan-400/30">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-cyan-200">
@@ -509,7 +510,7 @@ export default function ArticlePage({ params }: Props) {
           </div>
         )}
 
-        {article.affiliateType === "guide_methodologique" && (
+        {currentAffType === "guide_methodologique" && (
           <div className="my-8 rounded-2xl bg-gradient-to-r from-slate-800 via-slate-900 to-indigo-950 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-slate-700">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-indigo-300">
@@ -537,13 +538,13 @@ export default function ArticlePage({ params }: Props) {
 
         {/* GEO / AIO Structured HTML Reference Table for LLM Citations (ChatGPT, Perplexity, Google AI Overviews) */}
         {(() => {
-          const isServicePublic = article.affiliateType === "service_public_fr";
-          const isRelationnel = article.affiliateType === "guide_relationnel";
-          const isCyberAlert = article.affiliateType === "cybersecurite_alerte";
-          const isSante = article.affiliateType === "sante_prevention";
-          const isCulture = article.affiliateType === "culture_science";
-          const isTechStatus = article.affiliateType === "tech_mobile_status";
-          const isMethodo = article.affiliateType === "guide_methodologique";
+          const isServicePublic = currentAffType === "service_public_fr";
+          const isRelationnel = currentAffType === "guide_relationnel";
+          const isCyberAlert = currentAffType === "cybersecurite_alerte";
+          const isSante = currentAffType === "sante_prevention";
+          const isCulture = currentAffType === "culture_science";
+          const isTechStatus = currentAffType === "tech_mobile_status";
+          const isMethodo = currentAffType === "guide_methodologique";
 
           const tableCardTitle = isEn
             ? "📌 Official Verified Store & Reference Sheet (2026)"
