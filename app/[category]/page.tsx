@@ -6,7 +6,7 @@ import ArticleCard from "@/components/ArticleCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import HostingerBanner from "@/components/HostingerBanner";
 
-const SITE_URL = "https://kidenzo.store";
+const SITE_URL = "https://www.kidenzo.store";
 
 interface Props {
   params: { category: string };
@@ -63,7 +63,10 @@ export default function CategoryPage({ params }: Props) {
     >
       <Breadcrumbs
         items={[
-          { label: isEn ? "Espresso & Coffee Machines" : category.name },
+          {
+            label: isEn ? "Espresso & Coffee Machines" : category.name,
+            href: `/${category.slug}`,
+          },
         ]}
       />
 

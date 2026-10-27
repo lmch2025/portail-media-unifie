@@ -3,7 +3,7 @@ import { CATEGORIES } from "@/lib/categories";
 import { getAllArticles } from "@/lib/articles";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://kidenzo.store";
+  const baseUrl = "https://www.kidenzo.store";
 
   // Home route
   const routes: MetadataRoute.Sitemap = [

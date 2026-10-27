@@ -18,15 +18,15 @@ export const metadata: Metadata = {
   },
   description:
     "Portail éditorial de référence : concours administratifs au Cameroun, démarches officielles, tarifs Eneo/Camwater, énergie solaire, hébergement Cloud et tests d'équipements tech & espresso.",
-  metadataBase: new URL("https://kidenzo.store"),
+  metadataBase: new URL("https://www.kidenzo.store"),
   alternates: {
-    canonical: "https://kidenzo.store",
+    canonical: "https://www.kidenzo.store",
   },
   openGraph: {
     title: "Kidenzo Media | Guides Officiels, Concours, Énergie Solaire & Comparatifs Tech",
     description:
       "Portail éditorial de référence : concours administratifs au Cameroun, démarches officielles, tarifs Eneo/Camwater, énergie solaire, hébergement Cloud et tests d'équipements tech & espresso.",
-    url: "https://kidenzo.store",
+    url: "https://www.kidenzo.store",
     siteName: "Kidenzo Media",
     locale: "fr_FR",
     type: "website",

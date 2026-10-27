@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { CATEGORIES } from "@/lib/categories";
 
 export async function GET() {
-  const siteUrl = "https://kidenzo.store";
+  const siteUrl = "https://www.kidenzo.store";
 
   const categoryLines = CATEGORIES.map(
     (c) => `- [${c.name}](${siteUrl}/${c.slug}): ${c.description}`

@@ -22,7 +22,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    host: "https://kidenzo.store",
-    sitemap: "https://kidenzo.store/sitemap.xml",
+    host: "https://www.kidenzo.store",
+    sitemap: "https://www.kidenzo.store/sitemap.xml",
   };
 }
