@@ -44,7 +44,7 @@ export default function HostingerBanner() {
           <a
             href="https://www.hostinger.com?REFERRALCODE=XVCFABRICNC4"
             target="_blank"
-            rel="nofollow noopener noreferrer"
+            rel="sponsored nofollow noopener noreferrer"
             className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl font-black text-sm bg-amber-400 hover:bg-amber-300 active:bg-amber-500 text-slate-900 shadow-lg hover:shadow-amber-400/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0 min-h-[52px]"
           >
             <span>Activer l'offre (-20%) →</span>

@@ -98,14 +98,12 @@ export default function ArticlePage({ params }: Props) {
     affMeta.couponCode || (isEn ? "kidenzo202205-20" : "kidenzo202208-21");
   const currentAffType = (article.affiliateType || "") as string;
 
-  // Determine if this article is a tangible product / software review eligible for Product & Review Rich Snippets
+  // Determine if this article is a tangible physical product review eligible for Product & Editorial Review Rich Snippets
   const isProductReview =
-    currentAffType === "amazon_us" ||
-    currentAffType === "amazon_fr" ||
-    currentAffType === "hostinger" ||
-    category.slug === "espresso-cafe" ||
-    category.slug === "gadgets-amazon" ||
-    category.slug === "tests-produits";
+    (category.slug === "espresso-cafe" ||
+      category.slug === "gadgets-amazon" ||
+      category.slug === "tests-produits") &&
+    (currentAffType === "amazon_us" || currentAffType === "amazon_fr");
 
   // Clean numeric price parser for Schema.org Offer
   const extractNumericPrice = (rawPrice?: string): string => {
@@ -118,7 +116,7 @@ export default function ArticlePage({ params }: Props) {
 
   // Schema.org @graph tailored to Google Search Console guidelines:
   // 1. Article: Primary editorial entity (zero errors on all content types)
-  // 2. Product (Optional): Only for real product reviews with image, rating, return policy & shipping (fixes "Champ image manquant", "hasMerchantReturnPolicy", "shippingDetails" and "Type d'objet non valide pour <parent_node>")
+  // 2. Product (Optional): Only for real tangible product reviews with genuine editorial Review rating (no fake aggregateRating)
   // 3. FAQPage (Optional): Rich FAQs for AI & Search snippets
   const graphEntities: any[] = [
     {
@@ -134,6 +132,7 @@ export default function ArticlePage({ params }: Props) {
         "@type": "Person",
         "name": article.author.name,
         "jobTitle": article.author.role,
+        "url": `${SITE_URL}/a-propos`,
       },
       "publisher": {
         "@type": "Organization",
@@ -163,9 +162,7 @@ export default function ArticlePage({ params }: Props) {
       "brand": {
         "@type": "Brand",
         "name":
-          currentAffType === "hostinger"
-            ? "Hostinger"
-            : currentAffType === "amazon_us" || currentAffType === "amazon_fr"
+          currentAffType === "amazon_us" || currentAffType === "amazon_fr"
             ? (isEn ? "Amazon Official Selection" : "Sélection Officielle Amazon")
             : "Kidenzo Media Selection",
       },
@@ -173,20 +170,14 @@ export default function ArticlePage({ params }: Props) {
         "@type": "Review",
         "reviewRating": {
           "@type": "Rating",
-          "ratingValue": "4.8",
+          "ratingValue": affMeta.rating ? String(affMeta.rating) : "4.8",
           "bestRating": "5",
         },
         "author": {
           "@type": "Person",
           "name": article.author.name,
+          "url": `${SITE_URL}/a-propos`,
         },
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "127",
-        "bestRating": "5",
-        "worstRating": "1",
       },
       "offers": {
         "@type": "Offer",
@@ -305,7 +296,7 @@ export default function ArticlePage({ params }: Props) {
             </span>
             <span className="text-slate-400">•</span>
             <span className="text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200 font-semibold">
-              ✓ {article.humanScore}% {isEn ? "Human Verified" : "Vérifié Humain"}
+              ✓ {isEn ? "Expert Reviewed • 2026 Edition" : "Revu par l'Équipe Éditoriale • Édition 2026"}
             </span>
           </div>
 
@@ -375,7 +366,7 @@ export default function ArticlePage({ params }: Props) {
                 <a
                   href={affUrl}
                   target="_blank"
-                  rel="nofollow noopener noreferrer"
+                  rel="sponsored nofollow noopener noreferrer"
                   className="text-blue-700 underline hover:text-blue-900 font-extrabold"
                 >
                   {isEn
@@ -452,7 +443,7 @@ export default function ArticlePage({ params }: Props) {
             <a
               href={affUrl}
               target="_blank"
-              rel="nofollow noopener noreferrer"
+              rel="sponsored nofollow noopener noreferrer"
               className="px-6 py-4 rounded-xl font-black text-sm bg-amber-400 text-slate-950 hover:bg-amber-300 shadow-md transition-all shrink-0 min-h-[60px] flex items-center justify-center"
             >
               <span>🎰 Accéder à la plateforme officielle →</span>
@@ -763,7 +754,16 @@ export default function ArticlePage({ params }: Props) {
                         <a
                           href={affUrl}
                           target={affUrl.startsWith("#") ? undefined : "_blank"}
-                          rel={affUrl.startsWith("#") ? undefined : "nofollow noopener noreferrer"}
+                          rel={
+                            affUrl.startsWith("#")
+                              ? undefined
+                              : currentAffType === "amazon_us" ||
+                                currentAffType === "amazon_fr" ||
+                                currentAffType === "hostinger" ||
+                                currentAffType === "casino"
+                              ? "sponsored nofollow noopener noreferrer"
+                              : "noopener noreferrer"
+                          }
                           className="inline-flex items-center px-5 py-3 rounded-xl font-black text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-xs transition min-h-[48px]"
                         >
                           {tableBtnText}
@@ -874,8 +874,8 @@ export default function ArticlePage({ params }: Props) {
             <p className="text-xs text-slate-500 font-medium">{article.author.role}</p>
             <p className="text-xs text-slate-600 leading-relaxed pt-1">
               {isEn
-                ? "Independently tested, audited, and written by our specialist editorial team in strict compliance with E-E-A-T real-world testing standards."
-                : "Article audité et validé sans intelligence artificielle générative stéréotypée, conforme aux standards d'expérience vécue et d'expertise métier E-E-A-T."}
+                ? "Independently researched, verified with official primary sources, and curated by our specialized editorial desk."
+                : "Article vérifié auprès des sources officielles et des retours terrain par notre comité de rédaction spécialisé."}
             </p>
           </div>
         </div>

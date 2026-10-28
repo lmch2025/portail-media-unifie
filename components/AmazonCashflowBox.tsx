@@ -46,7 +46,7 @@ export default function AmazonCashflowBox({
           <a
             href={affiliateUrl}
             target="_blank"
-            rel="nofollow noopener noreferrer"
+            rel="sponsored nofollow noopener noreferrer"
             className="inline-flex items-center justify-center w-full sm:w-auto px-7 py-4 rounded-xl font-black text-base bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white shadow-md hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0 min-h-[60px]"
           >
             <span>{isFr ? "Voir l'offre officielle sur Amazon →" : "Check Best Price on Amazon →"}</span>
