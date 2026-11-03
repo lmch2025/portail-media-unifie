@@ -61,14 +61,14 @@ export default function ArticleCard({ article }: { article: Article | ArticleInd
       <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div className="flex items-center space-x-2.5">
           <img
-            src={article.author.avatar}
-            alt={article.author.name}
+            src={article.author?.avatar || "/logo.png"}
+            alt={article.author?.name || "Kidenzo Media"}
             className="w-8 h-8 rounded-full object-cover border border-slate-200"
           />
           <div className="flex flex-col">
-            <span className="text-xs font-bold text-slate-800">{article.author.name}</span>
+            <span className="text-xs font-bold text-slate-800">{article.author?.name || "Kidenzo Media"}</span>
             <span className="text-[10px] text-slate-500 font-medium truncate max-w-[130px]">
-              {article.author.role || (isEn ? "Editorial Specialist" : "Rédacteur Spécialisé")}
+              {article.author?.role || (isEn ? "Editorial Specialist" : "Rédacteur Spécialisé")}
             </span>
           </div>
         </div>

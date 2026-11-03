@@ -46,7 +46,7 @@ export function generateMetadata({ params }: Props): Metadata {
       locale: isEn ? "en_US" : "fr_FR",
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt || article.publishedAt,
-      authors: [article.author.name],
+      authors: [article.author?.name || "Kidenzo Media"],
       section: category.name,
       siteName: "Kidenzo Media",
       images: article.featuredImage
@@ -130,8 +130,8 @@ export default function ArticlePage({ params }: Props) {
       "dateModified": article.updatedAt || article.publishedAt,
       "author": {
         "@type": "Person",
-        "name": article.author.name,
-        "jobTitle": article.author.role,
+        "name": article.author?.name || "Kidenzo Media",
+        "jobTitle": article.author?.role || "Comité Éditorial",
         "url": `${SITE_URL}/a-propos`,
       },
       "publisher": {
@@ -175,7 +175,7 @@ export default function ArticlePage({ params }: Props) {
         },
         "author": {
           "@type": "Person",
-          "name": article.author.name,
+          "name": article.author?.name || "Kidenzo Media",
           "url": `${SITE_URL}/a-propos`,
         },
       },
@@ -227,7 +227,7 @@ export default function ArticlePage({ params }: Props) {
     });
   }
 
-  if (article.faq && article.faq.length > 0) {
+  if (article.faq && Array.isArray(article.faq) && article.faq.length > 0) {
     graphEntities.push({
       "@type": "FAQPage",
       "@id": `${canonicalUrl}#faq`,
@@ -311,13 +311,13 @@ export default function ArticlePage({ params }: Props) {
           {/* Author Byline */}
           <div className="pt-2 flex items-center space-x-3">
             <img
-              src={article.author.avatar}
-              alt={article.author.name}
+              src={article.author?.avatar || "/logo.png"}
+              alt={article.author?.name || "Kidenzo Media"}
               className="w-11 h-11 rounded-full object-cover border-2 border-white shadow-xs"
             />
             <div>
-              <p className="text-sm font-bold text-slate-900">{article.author.name}</p>
-              <p className="text-xs text-slate-500">{article.author.role}</p>
+              <p className="text-sm font-bold text-slate-900">{article.author?.name || "Kidenzo Media"}</p>
+              <p className="text-xs text-slate-500">{article.author?.role || "Comité Éditorial"}</p>
             </div>
           </div>
         </header>
@@ -340,43 +340,45 @@ export default function ArticlePage({ params }: Props) {
         )}
 
         {/* AIO Direct Answer Box: 30-Second Summary + Official Link Bullet */}
-        <section
-          aria-label={isEn ? "The Essentials in 30 Seconds" : "L'essentiel en 30 secondes"}
-          className="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 p-6 sm:p-8 shadow-xs"
-        >
-          <div className="flex items-center space-x-2 text-blue-900 font-black text-lg mb-3">
-            <span>⚡</span>
-            <h2>
-              {isEn
-                ? "The Essentials in 30 Seconds (Quick Summary)"
-                : "L'essentiel en 30 secondes (Synthèse Express)"}
-            </h2>
-          </div>
-          <ul className="space-y-2.5 text-sm sm:text-base text-slate-700">
-            {article.summary30s.map((point, index) => (
-              <li key={index} className="flex items-start space-x-2.5">
-                <span className="text-blue-600 font-black shrink-0 mt-0.5">▶</span>
-                <span>{point}</span>
+        {article.summary30s && Array.isArray(article.summary30s) && article.summary30s.length > 0 && (
+          <section
+            aria-label={isEn ? "The Essentials in 30 Seconds" : "L'essentiel en 30 secondes"}
+            className="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 p-6 sm:p-8 shadow-xs"
+          >
+            <div className="flex items-center space-x-2 text-blue-900 font-black text-lg mb-3">
+              <span>⚡</span>
+              <h2>
+                {isEn
+                  ? "The Essentials in 30 Seconds (Quick Summary)"
+                  : "L'essentiel en 30 secondes (Synthèse Express)"}
+              </h2>
+            </div>
+            <ul className="space-y-2.5 text-sm sm:text-base text-slate-700">
+              {article.summary30s.map((point, index) => (
+                <li key={index} className="flex items-start space-x-2.5">
+                  <span className="text-blue-600 font-black shrink-0 mt-0.5">▶</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+              <li className="flex items-start space-x-2.5 pt-1 border-t border-blue-200/60 font-semibold text-blue-950">
+                <span className="text-amber-600 font-black shrink-0 mt-0.5">★</span>
+                <span>
+                  {isEn ? "Official Verified Link & Live Price: " : "Lien Officiel Vérifié & Tarif : "}
+                  <a
+                    href={affUrl}
+                    target="_blank"
+                    rel="sponsored nofollow noopener noreferrer"
+                    className="text-blue-700 underline hover:text-blue-900 font-extrabold"
+                  >
+                    {isEn
+                      ? `Check ${prodName} availability on official store →`
+                      : `Consulter l'offre officielle ${prodName} →`}
+                  </a>
+                </span>
               </li>
-            ))}
-            <li className="flex items-start space-x-2.5 pt-1 border-t border-blue-200/60 font-semibold text-blue-950">
-              <span className="text-amber-600 font-black shrink-0 mt-0.5">★</span>
-              <span>
-                {isEn ? "Official Verified Link & Live Price: " : "Lien Officiel Vérifié & Tarif : "}
-                <a
-                  href={affUrl}
-                  target="_blank"
-                  rel="sponsored nofollow noopener noreferrer"
-                  className="text-blue-700 underline hover:text-blue-900 font-extrabold"
-                >
-                  {isEn
-                    ? `Check ${prodName} availability on official store →`
-                    : `Consulter l'offre officielle ${prodName} →`}
-                </a>
-              </span>
-            </li>
-          </ul>
-        </section>
+            </ul>
+          </section>
+        )}
 
         {/* Above-the-Fold Monetization & High-Value CRO Block */}
         {currentAffType === "amazon_us" && (
@@ -778,59 +780,71 @@ export default function ArticlePage({ params }: Props) {
         })()}
 
         {/* Field Experience Markers Box */}
-        <section
-          id="retours-experience"
-          aria-label={
-            isEn
-              ? "Hands-On Lab Observations and Field Notes"
-              : "Observations et retours d'expérience sur le terrain"
-          }
-          className="my-10 rounded-2xl bg-slate-900 text-white p-6 sm:p-8 shadow-xl border border-slate-800 space-y-4"
-        >
-          <div className="flex items-center space-x-2 text-emerald-400 font-bold text-base">
-            <span>🔬</span>
-            <h3>
-              {isEn
-                ? "Hands-On Lab Observations & Field Notes"
-                : "Retours d'Expérience & Observations Terrain"}
-            </h3>
-          </div>
-          <div className="grid grid-cols-1 gap-3.5 text-sm sm:text-base text-slate-300">
-            <p>
-              <strong className="text-white">
-                {isEn ? "Field Verdict:" : "Sur le terrain :"}
-              </strong>{" "}
-              {article.fieldNotes.fieldVerdict}
-            </p>
-            <p>
-              <strong className="text-white">
-                {isEn ? "In Practice:" : "En pratique :"}
-              </strong>{" "}
-              {article.fieldNotes.practicalTip}
-            </p>
-            <p>
-              <strong className="text-amber-400">
-                {isEn ? "Important Warning:" : "Attention :"}
-              </strong>{" "}
-              {article.fieldNotes.warning}
-            </p>
-            <p>
-              <strong className="text-rose-400">
-                {isEn ? "Mistake to Avoid:" : "Piège à éviter :"}
-              </strong>{" "}
-              {article.fieldNotes.trapToAvoid}
-            </p>
-            <p>
-              <strong className="text-cyan-400">
-                {isEn ? "Verified Benchmark:" : "Chiffre mesuré :"}
-              </strong>{" "}
-              {article.fieldNotes.keyMetric}
-            </p>
-          </div>
-        </section>
+        {article.fieldNotes && (
+          <section
+            id="retours-experience"
+            aria-label={
+              isEn
+                ? "Hands-On Lab Observations and Field Notes"
+                : "Observations et retours d'expérience sur le terrain"
+            }
+            className="my-10 rounded-2xl bg-slate-900 text-white p-6 sm:p-8 shadow-xl border border-slate-800 space-y-4"
+          >
+            <div className="flex items-center space-x-2 text-emerald-400 font-bold text-base">
+              <span>🔬</span>
+              <h3>
+                {isEn
+                  ? "Hands-On Lab Observations & Field Notes"
+                  : "Retours d'Expérience & Observations Terrain"}
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 gap-3.5 text-sm sm:text-base text-slate-300">
+              {article.fieldNotes.fieldVerdict && (
+                <p>
+                  <strong className="text-white">
+                    {isEn ? "Field Verdict:" : "Sur le terrain :"}
+                  </strong>{" "}
+                  {article.fieldNotes.fieldVerdict}
+                </p>
+              )}
+              {article.fieldNotes.practicalTip && (
+                <p>
+                  <strong className="text-white">
+                    {isEn ? "In Practice:" : "En pratique :"}
+                  </strong>{" "}
+                  {article.fieldNotes.practicalTip}
+                </p>
+              )}
+              {article.fieldNotes.warning && (
+                <p>
+                  <strong className="text-amber-400">
+                    {isEn ? "Important Warning:" : "Attention :"}
+                  </strong>{" "}
+                  {article.fieldNotes.warning}
+                </p>
+              )}
+              {article.fieldNotes.trapToAvoid && (
+                <p>
+                  <strong className="text-rose-400">
+                    {isEn ? "Mistake to Avoid:" : "Piège à éviter :"}
+                  </strong>{" "}
+                  {article.fieldNotes.trapToAvoid}
+                </p>
+              )}
+              {article.fieldNotes.keyMetric && (
+                <p>
+                  <strong className="text-cyan-400">
+                    {isEn ? "Verified Benchmark:" : "Chiffre mesuré :"}
+                  </strong>{" "}
+                  {article.fieldNotes.keyMetric}
+                </p>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* FAQ Section */}
-        {article.faq.length > 0 && (
+        {article.faq && Array.isArray(article.faq) && article.faq.length > 0 && (
           <section
             aria-label={isEn ? "Frequently Asked Questions" : "Foire aux questions"}
             className="my-10 space-y-4 pt-6 border-t border-slate-200"
@@ -862,16 +876,16 @@ export default function ArticlePage({ params }: Props) {
         {/* Author E-E-A-T Bio */}
         <div className="my-12 p-6 rounded-2xl bg-slate-100 border border-slate-200 flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-5 text-center sm:text-left">
           <img
-            src={article.author.avatar}
-            alt={article.author.name}
+            src={article.author?.avatar || "/logo.png"}
+            alt={article.author?.name || "Kidenzo Media"}
             className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-md shrink-0"
           />
           <div className="space-y-1">
             <span className="text-xs uppercase tracking-wider font-extrabold text-blue-700">
               {isEn ? "Written by a Certified Specialist" : "Rédigé par un expert certifié"}
             </span>
-            <h4 className="text-lg font-black text-slate-900">{article.author.name}</h4>
-            <p className="text-xs text-slate-500 font-medium">{article.author.role}</p>
+            <h4 className="text-lg font-black text-slate-900">{article.author?.name || "Kidenzo Media"}</h4>
+            <p className="text-xs text-slate-500 font-medium">{article.author?.role || "Comité Éditorial"}</p>
             <p className="text-xs text-slate-600 leading-relaxed pt-1">
               {isEn
                 ? "Independently researched, verified with official primary sources, and curated by our specialized editorial desk."
