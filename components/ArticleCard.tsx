@@ -67,8 +67,8 @@ export default function ArticleCard({ article }: { article: Article | ArticleInd
           />
           <div className="flex flex-col">
             <span className="text-xs font-bold text-slate-800">{article.author.name}</span>
-            <span className="text-[10px] text-emerald-600 font-semibold">
-              {isEn ? "100% Human Verified" : "100% Certifié Humain"}
+            <span className="text-[10px] text-slate-500 font-medium truncate max-w-[130px]">
+              {article.author.role || (isEn ? "Editorial Specialist" : "Rédacteur Spécialisé")}
             </span>
           </div>
         </div>

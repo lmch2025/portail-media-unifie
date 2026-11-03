@@ -60,7 +60,7 @@ export default function HomePage() {
             </h2>
           </div>
           <span className="text-xs text-slate-500 mt-2 sm:mt-0 font-medium">
-            100% Certifiés par nos experts terrain
+            Analyses & enquêtes documentées par notre rédaction
           </span>
         </div>
 
