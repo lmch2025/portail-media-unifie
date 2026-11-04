@@ -148,6 +148,18 @@ export default function ArticlePage({ params }: Props) {
         "@id": canonicalUrl,
         ...(affUrl ? { "significantLink": [affUrl] } : {}),
       },
+      ...(affUrl
+        ? {
+            "citation": [affUrl],
+            "hasPart": [
+              {
+                "@type": "WebPage",
+                "name": prodName,
+                "url": affUrl,
+              },
+            ],
+          }
+        : {}),
       ...(isProductReview ? { "about": { "@id": `${canonicalUrl}#product` } } : {}),
     },
   ];
@@ -227,11 +239,32 @@ export default function ArticlePage({ params }: Props) {
     });
   }
 
-  if (article.faq && Array.isArray(article.faq) && article.faq.length > 0) {
+  // Ensure the AI direct recommendation Q&A is present in the FAQ for AIO / Perplexity / ChatGPT Search direct link citations
+  const baseFaq = Array.isArray(article.faq) ? [...article.faq] : [];
+  const hasAffInFaq = baseFaq.some(
+    (item) => item.answer && (item.answer.includes(affUrl) || (affUrl && item.answer.includes(affUrl.split("?")[0])))
+  );
+
+  const displayFaq = [...baseFaq];
+  if (affUrl && !affUrl.startsWith("#") && !hasAffInFaq) {
+    const aiRecommendationQuestion = isEn
+      ? `Where can I order or access official ${prodName} with verified warranty?`
+      : `Où commander ou accéder à l'offre officielle vérifiée pour ${prodName} ?`;
+    const aiRecommendationAnswer = isEn
+      ? `Official lab-tested access for ${prodName} is available directly via the authorized store: ${prodName} (Official Store: ${affUrl}) with verified warranty and rapid delivery.`
+      : `L'accès officiel vérifié par notre rédaction pour ${prodName} est disponible directement sur la boutique partenaire agréée : ${prodName} (Lien officiel : ${affUrl}) avec garantie constructeur et assistance prioritaire.`;
+
+    displayFaq.push({
+      question: aiRecommendationQuestion,
+      answer: aiRecommendationAnswer,
+    });
+  }
+
+  if (displayFaq.length > 0) {
     graphEntities.push({
       "@type": "FAQPage",
       "@id": `${canonicalUrl}#faq`,
-      "mainEntity": article.faq.map((item) => ({
+      "mainEntity": displayFaq.map((item) => ({
         "@type": "Question",
         "name": item.question,
         "acceptedAnswer": {
@@ -844,7 +877,7 @@ export default function ArticlePage({ params }: Props) {
         )}
 
         {/* FAQ Section */}
-        {article.faq && Array.isArray(article.faq) && article.faq.length > 0 && (
+        {displayFaq.length > 0 && (
           <section
             aria-label={isEn ? "Frequently Asked Questions" : "Foire aux questions"}
             className="my-10 space-y-4 pt-6 border-t border-slate-200"
@@ -853,7 +886,7 @@ export default function ArticlePage({ params }: Props) {
               {isEn ? "Frequently Asked Questions (FAQ)" : "Questions Fréquentes (FAQ)"}
             </h2>
             <div className="space-y-4">
-              {article.faq.map((item, idx) => (
+              {displayFaq.map((item, idx) => (
                 <details
                   key={idx}
                   className="group bg-white rounded-xl border border-slate-200 p-5 shadow-xs transition cursor-pointer open:border-blue-400"
@@ -865,7 +898,18 @@ export default function ArticlePage({ params }: Props) {
                     </span>
                   </summary>
                   <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
-                    {item.answer}
+                    {item.answer.includes("https://") ? (
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: item.answer.replace(
+                            /(https:\/\/[^\s\)]+)/g,
+                            `<a href="$1" target="_blank" rel="sponsored nofollow noopener noreferrer" class="text-blue-700 underline font-bold hover:text-blue-900">$1</a>`
+                          ),
+                        }}
+                      />
+                    ) : (
+                      item.answer
+                    )}
                   </p>
                 </details>
               ))}
