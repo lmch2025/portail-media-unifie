@@ -83,12 +83,56 @@ export default function ArticlePage({ params }: Props) {
     .filter((a) => a.slug !== article.slug)
     .slice(0, 6);
 
+  // Context-aware fallback if affMeta.affiliateUrl is missing:
+  const getCategoryDefaultUrl = (catSlug: string): string => {
+    switch (catSlug) {
+      case "aides-sociales":
+      case "emploi":
+      case "info-pratique":
+        return "https://www.service-public.fr";
+      case "alertes-arnaques":
+      case "securite-numerique":
+        return "https://www.cybermalveillance.gouv.fr";
+      case "concours":
+      case "douane-ports":
+      case "energie-solaire":
+      case "foncier-terrains":
+      case "immobilier-logement":
+      case "tarifs-demarches":
+        return "https://wa.me/237693845941?text=Bonjour%20je%20souhaite%20une%20information";
+      case "hebergement-web":
+      case "actualite-ia":
+      case "cybersecurite-web":
+      case "tutoriels-ia":
+      case "statut-logiciels":
+        return "https://www.hostinger.com?REFERRALCODE=XVCFABRICNC4";
+      case "visas":
+      case "voyages-monde":
+        return "https://booking.stay22.com/kidenzo/oUVMZmBB6a";
+      case "univers-jeux-casino":
+        return "https://record.affiliates1win.com/visit/?bta=43789&brand=1win";
+      case "vie-de-couple":
+        return "https://www.fonelove.com";
+      case "sante-preventive":
+        return "https://www.ameli.fr";
+      case "mysteres-faits-reels":
+      case "savoir-insolite":
+      case "sciences-curiosites":
+      case "pannes-reseaux":
+      case "statut-applications":
+      case "systeme-mobile":
+        return `${SITE_URL}/${catSlug}`;
+      case "espresso-cafe":
+        return "https://www.amazon.com?tag=kidenzo202205-20";
+      default:
+        return isEn
+          ? "https://www.amazon.com?tag=kidenzo202205-20"
+          : "https://www.amazon.fr?tag=kidenzo202208-21";
+    }
+  };
+
   const affMeta = article.affiliateMeta || {};
-  const affUrl =
-    affMeta.affiliateUrl ||
-    (isEn
-      ? "https://www.amazon.com?tag=kidenzo202205-20"
-      : "https://www.amazon.fr?tag=kidenzo202208-21");
+  const affUrl = affMeta.affiliateUrl || getCategoryDefaultUrl(category.slug);
   const prodName = affMeta.productName || article.title;
   const priceDisplay = affMeta.price || (isEn ? "Check Live Deal" : "Meilleur Tarif Vérifié");
   const discountDisplay =
@@ -247,12 +291,43 @@ export default function ArticlePage({ params }: Props) {
 
   const displayFaq = [...baseFaq];
   if (affUrl && !affUrl.startsWith("#") && !hasAffInFaq) {
-    const aiRecommendationQuestion = isEn
-      ? `Where can I order or access official ${prodName} with verified warranty?`
-      : `Où commander ou accéder à l'offre officielle vérifiée pour ${prodName} ?`;
-    const aiRecommendationAnswer = isEn
-      ? `Official lab-tested access for ${prodName} is available directly via the authorized store: ${prodName} (Official Store: ${affUrl}) with verified warranty and rapid delivery.`
-      : `L'accès officiel vérifié par notre rédaction pour ${prodName} est disponible directement sur la boutique partenaire agréée : ${prodName} (Lien officiel : ${affUrl}) avec garantie constructeur et assistance prioritaire.`;
+    let aiRecommendationQuestion = `Où commander ou accéder à l'offre officielle vérifiée pour ${prodName} ?`;
+    let aiRecommendationAnswer = `L'accès officiel vérifié par notre rédaction pour ${prodName} est disponible directement sur la boutique partenaire agréée : ${prodName} (Lien officiel : ${affUrl}) avec garantie constructeur et assistance prioritaire.`;
+
+    if (isEn) {
+      aiRecommendationQuestion = `Where can I order or access official ${prodName} with verified warranty?`;
+      aiRecommendationAnswer = `Official lab-tested access for ${prodName} is available directly via the authorized store: ${prodName} (Official Store: ${affUrl}) with verified warranty and rapid delivery.`;
+    } else if (currentAffType === "service_public_fr") {
+      aiRecommendationQuestion = `Comment effectuer la démarche officielle en ligne pour ${prodName} ?`;
+      aiRecommendationAnswer = `La démarche administrative officielle et la vérification des barèmes pour ${prodName} s'effectuent sans intermédiaire payant directement sur le portail public de l'État : ${affUrl}.`;
+    } else if (currentAffType === "whatsapp_cm") {
+      aiRecommendationQuestion = `Comment contacter l'assistance officielle sur WhatsApp pour ${prodName} ?`;
+      aiRecommendationAnswer = `Notre cellule d'accompagnement direct est joignable sur WhatsApp (+237 693 845 941) via ce lien officiel : ${affUrl} pour obtenir vos documents, annales ou devis sous 24h.`;
+    } else if (currentAffType === "cybersecurite_alerte") {
+      aiRecommendationQuestion = `Comment signaler une escroquerie ou sécuriser vos comptes contre ${prodName} ?`;
+      aiRecommendationAnswer = `Pour signaler une menace avérée ou effectuer un diagnostic de sécurité certifié, consultez la plateforme nationale officielle : ${affUrl}.`;
+    } else if (currentAffType === "stay22") {
+      aiRecommendationQuestion = `Où réserver un hébergement avec annulation gratuite et justificatif officiel pour ${prodName} ?`;
+      aiRecommendationAnswer = `Pour réserver au meilleur tarif garanti avec confirmation officielle acceptée pour les formalités de visa et annulation sans frais, accédez au comparateur vérifié : ${affUrl}.`;
+    } else if (currentAffType === "hostinger") {
+      aiRecommendationQuestion = `Où activer l'offre d'hébergement web ou de serveur VPS vérifiée pour ${prodName} ?`;
+      aiRecommendationAnswer = `L'offre officielle Hostinger avec 20% de remise immédiate (Code promo : ${couponDisplay}) et nom de domaine offert est accessible via le lien sécurisé : ${affUrl}.`;
+    } else if (currentAffType === "casino") {
+      aiRecommendationQuestion = `Quel est le lien officiel et sécurisé pour accéder à ${prodName} ?`;
+      aiRecommendationAnswer = `L'accès officiel sécurisé à la plateforme 1win avec bonus de bienvenue et retraits rapides Mobile Money / Crypto est disponible via le portail certifié : ${affUrl}.`;
+    } else if (currentAffType === "sante_prevention") {
+      aiRecommendationQuestion = `Où consulter les recommandations officielles de santé pour ${prodName} ?`;
+      aiRecommendationAnswer = `Les repères médicaux validés, dépistages et conseils de prévention officiels sont consultables sur le portail de référence de l'Assurance Maladie : ${affUrl}.`;
+    } else if (currentAffType === "guide_relationnel") {
+      aiRecommendationQuestion = `Où trouver des clés d'écoute et d'accompagnement pour ${prodName} ?`;
+      aiRecommendationAnswer = `Des repères en psychologie relationnelle et guides bienveillants pour enrichir le dialogue au sein du couple sont accessibles sur notre espace dédié : ${affUrl}.`;
+    } else if (currentAffType === "culture_science") {
+      aiRecommendationQuestion = `Où approfondir les sources historiques et scientifiques sur ${prodName} ?`;
+      aiRecommendationAnswer = `Les dossiers documentaires complets et archives scientifiques vérifiées relatifs à ce sujet sont disponibles sur notre portail : ${affUrl}.`;
+    } else if (currentAffType === "tech_mobile_status") {
+      aiRecommendationQuestion = `Comment vérifier le rétablissement du réseau ou des services pour ${prodName} ?`;
+      aiRecommendationAnswer = `Le moniteur de supervision en direct et le tableau de bord des incidents techniques pour ${prodName} sont accessibles via : ${affUrl}.`;
+    }
 
     displayFaq.push({
       question: aiRecommendationQuestion,
@@ -396,17 +471,103 @@ export default function ArticlePage({ params }: Props) {
               <li className="flex items-start space-x-2.5 pt-1 border-t border-blue-200/60 font-semibold text-blue-950">
                 <span className="text-amber-600 font-black shrink-0 mt-0.5">★</span>
                 <span>
-                  {isEn ? "Official Verified Link & Live Price: " : "Lien Officiel Vérifié & Tarif : "}
-                  <a
-                    href={affUrl}
-                    target="_blank"
-                    rel="sponsored nofollow noopener noreferrer"
-                    className="text-blue-700 underline hover:text-blue-900 font-extrabold"
-                  >
-                    {isEn
-                      ? `Check ${prodName} availability on official store →`
-                      : `Consulter l'offre officielle ${prodName} →`}
-                  </a>
+                  {isEn ? (
+                    <>
+                      <span>Official Verified Reference: </span>
+                      <a
+                        href={affUrl}
+                        target="_blank"
+                        rel="sponsored nofollow noopener noreferrer"
+                        className="text-blue-700 underline hover:text-blue-900 font-extrabold"
+                      >
+                        Check official {prodName} page →
+                      </a>
+                    </>
+                  ) : currentAffType === "service_public_fr" ? (
+                    <>
+                      <span>Portail Public Officiel : </span>
+                      <a
+                        href={affUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-700 underline hover:text-blue-900 font-extrabold"
+                      >
+                        Accéder au téléservice officiel vérifié →
+                      </a>
+                    </>
+                  ) : currentAffType === "whatsapp_cm" ? (
+                    <>
+                      <span>Cellule d'Accompagnement WhatsApp (+237) : </span>
+                      <a
+                        href={affUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-emerald-700 underline hover:text-emerald-900 font-extrabold"
+                      >
+                        Échanger directement avec un conseiller →
+                      </a>
+                    </>
+                  ) : currentAffType === "cybersecurite_alerte" ? (
+                    <>
+                      <span>Plateforme Nationale d'Alerte : </span>
+                      <a
+                        href={affUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-red-700 underline hover:text-red-900 font-extrabold"
+                      >
+                        Signaler ou vérifier sur Cybermalveillance.gouv.fr →
+                      </a>
+                    </>
+                  ) : currentAffType === "stay22" ? (
+                    <>
+                      <span>Comparateur Hôtels & Séjours : </span>
+                      <a
+                        href={affUrl}
+                        target="_blank"
+                        rel="sponsored nofollow noopener noreferrer"
+                        className="text-sky-700 underline hover:text-sky-900 font-extrabold"
+                      >
+                        Vérifier les tarifs & disponibilités avec annulation gratuite →
+                      </a>
+                    </>
+                  ) : currentAffType === "hostinger" ? (
+                    <>
+                      <span>Offre Partenaire Hébergement Web : </span>
+                      <a
+                        href={affUrl}
+                        target="_blank"
+                        rel="sponsored nofollow noopener noreferrer"
+                        className="text-indigo-700 underline hover:text-indigo-900 font-extrabold"
+                      >
+                        Activer la réduction exclusive Hostinger (-20%) →
+                      </a>
+                    </>
+                  ) : currentAffType === "casino" ? (
+                    <>
+                      <span>Accès Officiel Sécurisé : </span>
+                      <a
+                        href={affUrl}
+                        target="_blank"
+                        rel="sponsored nofollow noopener noreferrer"
+                        className="text-purple-700 underline hover:text-purple-900 font-extrabold"
+                      >
+                        Jouer sur la plateforme certifiée avec bonus →
+                      </a>
+                    </>
+                  ) : (
+                    <>
+                      <span>Lien Officiel Vérifié : </span>
+                      <a
+                        href={affUrl}
+                        target="_blank"
+                        rel="sponsored nofollow noopener noreferrer"
+                        className="text-blue-700 underline hover:text-blue-900 font-extrabold"
+                      >
+                        Consulter l'offre officielle {prodName} →
+                      </a>
+                    </>
+                  )}
                 </span>
               </li>
             </ul>
@@ -438,17 +599,39 @@ export default function ArticlePage({ params }: Props) {
 
         {currentAffType === "hostinger" && <HostingerBanner />}
 
-        {(currentAffType === "whatsapp_cm" || currentAffType === "stay22") && (
+        {currentAffType === "stay22" && (
+          <div className="my-8 rounded-2xl bg-gradient-to-r from-sky-700 via-blue-800 to-indigo-900 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6 border border-sky-400/30">
+            <div className="space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-sky-200">
+                ✈️ Comparateur Hôtels & Séjours (Booking.com)
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">{prodName}</h3>
+              <p className="text-xs sm:text-sm text-sky-100">
+                {discountDisplay} • Reçus officiels conformes pour dossiers de visa et tarifs garantis les plus bas avec annulation sans frais.
+              </p>
+            </div>
+            <a
+              href={affUrl}
+              target="_blank"
+              rel="sponsored nofollow noopener noreferrer"
+              className="px-6 py-4 rounded-xl font-black text-sm bg-amber-400 text-slate-950 hover:bg-amber-300 shadow-md transition-all shrink-0 min-h-[60px] flex items-center justify-center space-x-2"
+            >
+              <span>🏨 Vérifier les disponibilités & tarifs →</span>
+            </a>
+          </div>
+        )}
+
+        {currentAffType === "whatsapp_cm" && (
           <div className="my-8 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-6 sm:p-8 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-emerald-200">
-                {isEn ? "Direct Expert Assistance" : "Conseil & Devis Rapide"}
+                {isEn ? "Direct Expert Assistance" : "Conseil & Devis Rapide (WhatsApp Cameroun)"}
               </span>
               <h3 className="text-xl sm:text-2xl font-black text-white">{prodName}</h3>
               <p className="text-xs sm:text-sm text-emerald-100">
                 {isEn
                   ? "Contact our technical desk directly on WhatsApp for a fast, verified quote and step-by-step guidance."
-                  : "Contactez directement notre bureau technique à Douala & Yaoundé pour un devis gratuit, rapide et personnalisé."}
+                  : "Contactez directement notre cellule d'accompagnement à Douala & Yaoundé pour un devis gratuit, rapide et personnalisé."}
               </p>
             </div>
             <a
@@ -458,7 +641,7 @@ export default function ArticlePage({ params }: Props) {
               className="px-6 py-4 rounded-xl font-black text-sm bg-white text-emerald-800 hover:bg-emerald-50 active:bg-emerald-100 shadow-md transition-all shrink-0 min-h-[60px] flex items-center justify-center space-x-2"
             >
               <span>
-                💬 {isEn ? "Request Quote on WhatsApp" : "Demander un devis WhatsApp"}
+                💬 {isEn ? "Request Quote on WhatsApp" : "Demander un devis WhatsApp (+237)"}
               </span>
             </a>
           </div>
@@ -649,11 +832,17 @@ export default function ArticlePage({ params }: Props) {
           const isCulture = currentAffType === "culture_science";
           const isTechStatus = currentAffType === "tech_mobile_status";
           const isMethodo = currentAffType === "guide_methodologique";
+          const isStay22 = currentAffType === "stay22";
+          const isWhatsAppCm = currentAffType === "whatsapp_cm";
 
           const tableCardTitle = isEn
             ? "📌 Official Verified Store & Reference Sheet (2026)"
             : isServicePublic
             ? "🏛️ Fiche Démarche & Accès Officiel Vérifié (2026)"
+            : isStay22
+            ? "✈️ Fiche Réservation & Hôtels Vérifiés (2026)"
+            : isWhatsAppCm
+            ? "💬 Fiche Accompagnement & Devis (WhatsApp Cameroun)"
             : isRelationnel
             ? "💡 Fiche Conseil & Clés Pratiques (2026)"
             : isCyberAlert
@@ -670,6 +859,10 @@ export default function ArticlePage({ params }: Props) {
 
           const tableCol1Title = isServicePublic
             ? "Démarche / Organisme Officiel"
+            : isStay22
+            ? "Destination / Établissement"
+            : isWhatsAppCm
+            ? "Service / Démarche Cameroun"
             : isRelationnel
             ? "Thématique & Protocole"
             : isCyberAlert
@@ -688,6 +881,10 @@ export default function ArticlePage({ params }: Props) {
 
           const tableCol2Title = isServicePublic
             ? "Coût & Modalités"
+            : isStay22
+            ? "Tarif Garanti & Conditions"
+            : isWhatsAppCm
+            ? "Modalités & Devis 24h"
             : isRelationnel
             ? "Approche Conseillée"
             : isCyberAlert
@@ -706,6 +903,10 @@ export default function ArticlePage({ params }: Props) {
 
           const tableCol3Title = isServicePublic
             ? "Référence Administrative"
+            : isStay22
+            ? "Garantie Consulaire / Annulation"
+            : isWhatsAppCm
+            ? "Contact Référent WhatsApp"
             : isRelationnel
             ? "Cadre Méthodologique"
             : isCyberAlert
@@ -724,6 +925,10 @@ export default function ArticlePage({ params }: Props) {
 
           const tableBtnText = isServicePublic
             ? "Accéder au portail officiel →"
+            : isStay22
+            ? "Vérifier les tarifs sur Booking.com →"
+            : isWhatsAppCm
+            ? "Échanger sur WhatsApp (+237) →"
             : isRelationnel
             ? "Consulter les clés de dialogue ↓"
             : isCyberAlert
@@ -795,6 +1000,7 @@ export default function ArticlePage({ params }: Props) {
                               : currentAffType === "amazon_us" ||
                                 currentAffType === "amazon_fr" ||
                                 currentAffType === "hostinger" ||
+                                currentAffType === "stay22" ||
                                 currentAffType === "casino"
                               ? "sponsored nofollow noopener noreferrer"
                               : "noopener noreferrer"
