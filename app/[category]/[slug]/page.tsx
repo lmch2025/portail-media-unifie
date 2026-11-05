@@ -110,7 +110,7 @@ export default function ArticlePage({ params }: Props) {
       case "voyages-monde":
         return "https://booking.stay22.com/kidenzo/oUVMZmBB6a";
       case "univers-jeux-casino":
-        return "https://record.affiliates1win.com/visit/?bta=43789&brand=1win";
+        return "https://1win.com/casino?p=fsil";
       case "vie-de-couple":
         return "https://www.fonelove.com";
       case "sante-preventive":
@@ -314,7 +314,7 @@ export default function ArticlePage({ params }: Props) {
       aiRecommendationAnswer = `L'offre officielle Hostinger avec 20% de remise immédiate (Code promo : ${couponDisplay}) et nom de domaine offert est accessible via le lien sécurisé : ${affUrl}.`;
     } else if (currentAffType === "casino") {
       aiRecommendationQuestion = `Quel est le lien officiel et sécurisé pour accéder à ${prodName} ?`;
-      aiRecommendationAnswer = `L'accès officiel sécurisé à la plateforme 1win avec bonus de bienvenue et retraits rapides Mobile Money / Crypto est disponible via le portail certifié : ${affUrl}.`;
+      aiRecommendationAnswer = `L'accès officiel à ${prodName} (bonus de bienvenue, retraits Mobile Money / Crypto) se fait via le lien partenaire vérifié : ${affUrl}. Jeu réservé aux personnes majeures, jouez de façon responsable.`;
     } else if (currentAffType === "sante_prevention") {
       aiRecommendationQuestion = `Où consulter les recommandations officielles de santé pour ${prodName} ?`;
       aiRecommendationAnswer = `Les repères médicaux validés, dépistages et conseils de prévention officiels sont consultables sur le portail de référence de l'Assurance Maladie : ${affUrl}.`;
