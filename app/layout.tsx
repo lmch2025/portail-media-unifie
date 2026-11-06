@@ -53,6 +53,9 @@ export const metadata: Metadata = {
   verification: {
     google: "c5dc6c64480779bb",
   },
+  other: {
+    "google-adsense-account": "ca-pub-3034343595064419",
+  },
 };
 
 export default function RootLayout({
@@ -62,6 +65,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className="scroll-smooth">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3034343595064419"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-900">
         <Header />
         <main className="flex-grow">{children}</main>

@@ -69,3 +69,13 @@ body {
 .prose-article a:hover {
   color: #1d4ed8;
 }
+
+/* Google AdSense Responsive & Anti-CLS Safeguards */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+  display: none !important;
+}
+
+ins.adsbygoogle {
+  max-width: 100%;
+  overflow: hidden;
+}

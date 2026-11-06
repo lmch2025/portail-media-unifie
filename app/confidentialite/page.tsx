@@ -43,12 +43,45 @@ export default function ConfidentialitePage() {
           Vous pouvez à tout moment configurer votre navigateur web pour bloquer ou supprimer ces cookies sans que cela n&apos;affecte votre accès à l&apos;information.
         </p>
 
-        <h2 className="text-xl font-bold text-slate-900 pt-4">4. Liens Partenaires &amp; Cookies Tiers</h2>
+        <h2 className="text-xl font-bold text-slate-900 pt-4">4. Publicité Google AdSense &amp; Cookies Publicitaires</h2>
+        <p>
+          Pour financer la gratuité de nos enquêtes, simulateurs et guides pratiques, Kidenzo Media utilise le réseau publicitaire <strong>Google AdSense</strong> (identifiant éditeur officiel : <code>pub-3034343595064419</code>).
+        </p>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>
+            Les fournisseurs tiers, y compris Google, utilisent des cookies (tels que le cookie DoubleClick) pour diffuser des annonces pertinentes en fonction des visites antérieures des internautes sur ce portail ou sur d&apos;autres pages web.
+          </li>
+          <li>
+            Grâce aux cookies publicitaires, Google et ses partenaires adaptent les annonces qui vous sont présentées selon votre navigation.
+          </li>
+          <li>
+            Vous pouvez désactiver à tout moment la publicité personnalisée en accédant aux{" "}
+            <a
+              href="https://adssettings.google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline font-semibold hover:text-blue-800"
+            >
+              Paramètres des annonces Google
+            </a>{" "}
+            ou via la plateforme d&apos;autorégulation{" "}
+            <a
+              href="https://www.aboutads.info"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline font-semibold hover:text-blue-800"
+            >
+              www.aboutads.info
+            </a>.
+          </li>
+        </ul>
+
+        <h2 className="text-xl font-bold text-slate-900 pt-4">5. Liens Partenaires &amp; Cookies d&apos;Affiliation</h2>
         <p>
           Lorsque vous cliquez sur un lien partenaire vérifié (Amazon, Hostinger, Stay22), un cookie technique temporaire est déposé par le marchand partenaire pour authentifier que la visite provient de notre recommandation. Ce cookie ne contient aucune donnée personnelle sensible et expire automatiquement conformément aux politiques de chaque commerçant (généralement 24h à 30 jours).
         </p>
 
-        <h2 className="text-xl font-bold text-slate-900 pt-4">5. Vos Droits d&apos;Accès, de Rectification et d&apos;Effacement</h2>
+        <h2 className="text-xl font-bold text-slate-900 pt-4">6. Vos Droits d&apos;Accès, de Rectification et d&apos;Effacement</h2>
         <p>
           Conformément aux réglementations sur la protection des données, vous disposez d&apos;un droit d&apos;accès, de rectification et d&apos;effacement total de vos données. Pour exercer ce droit, écrivez simplement à : <strong>dpo@kidenzo.store</strong>.
         </p>
