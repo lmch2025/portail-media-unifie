@@ -6,6 +6,10 @@ import ArticleCard from "@/components/ArticleCard";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import HostingerBanner from "@/components/HostingerBanner";
 
+// ─── ZÉRO FAST ORIGIN TRANSFER : pages catégories 100% statiques ─────────────
+export const revalidate = false;
+export const dynamic = "force-static";
+
 const SITE_URL = "https://www.kidenzo.store";
 
 interface Props {

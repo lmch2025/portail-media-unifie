@@ -1,10 +1,13 @@
+﻿export const revalidate = false;
+export const dynamic = "force-static";
+
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Contact & Desk Rédactionnel | Kidenzo Media",
+  title: "Contact & Desk RÃ©dactionnel | Kidenzo Media",
   description:
-    "Prenez contact avec la rédaction de Kidenzo Media : assistance démarches, devis solaire et B2B au Cameroun, partenariats presse et signalements d'erreurs.",
+    "Prenez contact avec la rÃ©daction de Kidenzo Media : assistance dÃ©marches, devis solaire et B2B au Cameroun, partenariats presse et signalements d'erreurs.",
   alternates: {
     canonical: "https://www.kidenzo.store/contact",
   },
@@ -24,14 +27,14 @@ export default function ContactPage() {
       "address": [
         {
           "@type": "PostalAddress",
-          "streetAddress": "Akwa, Boulevard de la Liberté",
+          "streetAddress": "Akwa, Boulevard de la LibertÃ©",
           "addressLocality": "Douala",
           "addressCountry": "CM",
         },
         {
           "@type": "PostalAddress",
           "streetAddress": "Bastos, Avenue Charles de Gaulle",
-          "addressLocality": "Yaoundé",
+          "addressLocality": "YaoundÃ©",
           "addressCountry": "CM",
         },
       ],
@@ -49,13 +52,13 @@ export default function ContactPage() {
 
         <header className="space-y-4 border-b border-slate-200 pb-8">
           <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full">
-            Écoute &amp; Assistance Réactive
+            Ã‰coute &amp; Assistance RÃ©active
           </span>
           <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
-            Contacter la Rédaction
+            Contacter la RÃ©daction
           </h1>
           <p className="text-lg text-slate-600">
-            Une question sur un concours, un devis d&apos;énergie solaire, une demande d&apos;orientation administrative ou une suggestion d&apos;article ? Notre équipe vous répond sous 24 heures.
+            Une question sur un concours, un devis d&apos;Ã©nergie solaire, une demande d&apos;orientation administrative ou une suggestion d&apos;article ? Notre Ã©quipe vous rÃ©pond sous 24 heures.
           </p>
         </header>
 
@@ -64,17 +67,17 @@ export default function ContactPage() {
           <div className="p-6 bg-gradient-to-br from-emerald-500 to-teal-700 text-white rounded-2xl shadow-lg space-y-4 flex flex-col justify-between">
             <div className="space-y-3">
               <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl">
-                💬
+                ðŸ’¬
               </div>
               <h2 className="text-2xl font-black">Desk WhatsApp Direct</h2>
               <p className="text-sm text-emerald-50 leading-relaxed">
-                Le moyen le plus rapide pour joindre un consultant local (Douala &amp; Yaoundé) pour vos questions de démarches administratives, devis kits solaires, formalités foncières ou transit douanier.
+                Le moyen le plus rapide pour joindre un consultant local (Douala &amp; YaoundÃ©) pour vos questions de dÃ©marches administratives, devis kits solaires, formalitÃ©s fonciÃ¨res ou transit douanier.
               </p>
               <div className="pt-2 font-mono text-lg font-bold">
                 +237 693 845 941
               </div>
               <p className="text-xs text-emerald-100">
-                Ouvert du lundi au samedi de 08h00 à 19h00 (Heure de Douala / GMT+1).
+                Ouvert du lundi au samedi de 08h00 Ã  19h00 (Heure de Douala / GMT+1).
               </p>
             </div>
             <a
@@ -91,17 +94,17 @@ export default function ContactPage() {
           <div className="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm space-y-6">
             <div>
               <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-3">
-                ✉️
+                âœ‰ï¸
               </div>
-              <h2 className="text-xl font-bold text-slate-900">Courrier Électronique</h2>
+              <h2 className="text-xl font-bold text-slate-900">Courrier Ã‰lectronique</h2>
               <p className="text-sm text-slate-500 mt-1">
-                Pour toute communication officielle, proposition de partenariat média ou signalement d&apos;erreur.
+                Pour toute communication officielle, proposition de partenariat mÃ©dia ou signalement d&apos;erreur.
               </p>
             </div>
 
             <div className="space-y-3 text-sm">
               <div className="p-3 bg-slate-50 rounded-lg">
-                <p className="font-semibold text-slate-900">Rédaction &amp; Informations :</p>
+                <p className="font-semibold text-slate-900">RÃ©daction &amp; Informations :</p>
                 <a href="mailto:contact@kidenzo.store" className="text-blue-600 font-medium hover:underline">
                   contact@kidenzo.store
                 </a>
@@ -113,7 +116,7 @@ export default function ContactPage() {
                 </a>
               </div>
               <div className="p-3 bg-slate-50 rounded-lg">
-                <p className="font-semibold text-slate-900">Protection des Données (DPO) :</p>
+                <p className="font-semibold text-slate-900">Protection des DonnÃ©es (DPO) :</p>
                 <a href="mailto:dpo@kidenzo.store" className="text-blue-600 font-medium hover:underline">
                   dpo@kidenzo.store
                 </a>
@@ -124,17 +127,17 @@ export default function ContactPage() {
 
         {/* Physical Locations */}
         <section className="pt-8 border-t border-slate-200">
-          <h2 className="text-xl font-bold text-slate-900 mb-4">📍 Bureaux de Correspondance</h2>
+          <h2 className="text-xl font-bold text-slate-900 mb-4">ðŸ“ Bureaux de Correspondance</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm text-slate-600">
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-200/60">
               <h3 className="font-bold text-slate-900 mb-1">Bureau Douala (Littoral)</h3>
-              <p>Boulevard de la Liberté, Akwa</p>
-              <p>BP 1248 Douala, République du Cameroun</p>
+              <p>Boulevard de la LibertÃ©, Akwa</p>
+              <p>BP 1248 Douala, RÃ©publique du Cameroun</p>
             </div>
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-200/60">
-              <h3 className="font-bold text-slate-900 mb-1">Bureau Yaoundé (Centre)</h3>
+              <h3 className="font-bold text-slate-900 mb-1">Bureau YaoundÃ© (Centre)</h3>
               <p>Avenue Charles de Gaulle, Quartier Bastos</p>
-              <p>Yaoundé, République du Cameroun</p>
+              <p>YaoundÃ©, RÃ©publique du Cameroun</p>
             </div>
           </div>
         </section>
@@ -142,3 +145,4 @@ export default function ContactPage() {
     </>
   );
 }
+

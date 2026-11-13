@@ -7,6 +7,12 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import AmazonCashflowBox from "@/components/AmazonCashflowBox";
 import HostingerBanner from "@/components/HostingerBanner";
 
+// ─── ZÉRO FAST ORIGIN TRANSFER : pages 100% statiques au build ───────────────
+// revalidate=false + generateStaticParams = aucune requête serveur après deploy.
+// Le CDN sert directement le HTML pré-rendu sans jamais interroger l'Origin.
+export const revalidate = false;
+export const dynamic = "force-static";
+
 const SITE_URL = "https://www.kidenzo.store";
 
 interface Props {
