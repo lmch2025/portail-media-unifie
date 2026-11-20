@@ -16,37 +16,37 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-6 max-w-4xl mx-auto py-8 sm:py-14">
           <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200 text-blue-700 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-wide">
-            <span>ðŸ‡¨ðŸ‡² & ðŸŒ Portail MÃ©dia d'Information Officielle & Pratique</span>
+            <span>🇨🇲 & 🌍 Portail Média d&apos;Information Officielle &amp; Pratique</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-[1.15]">
-            L'Information Claire, les Guides Officiels et les Solutions VÃ©rifiÃ©es.
+            L&apos;Information Claire, les Guides Officiels et les Solutions Vérifiées.
           </h1>
 
           <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
-            AccÃ©dez en accÃ¨s libre aux annales de concours au Cameroun, dÃ©marches fonciÃ¨res, tarifs administratifs, dimensionnement solaire, comparatifs tech et guides de voyage.
+            Accédez en accès libre aux annales de concours au Cameroun, démarches foncières, tarifs administratifs, dimensionnement solaire, comparatifs tech et guides de voyage.
           </p>
 
           {/* Quick Action Badges */}
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-xs sm:text-sm font-semibold">
             <Link href="/concours" className="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-xs hover:border-blue-500 hover:text-blue-600 transition flex items-center space-x-1.5">
-              <span>ðŸŽ“</span>
+              <span>🎓</span>
               <span>Concours Cameroun</span>
             </Link>
             <Link href="/energie-solaire" className="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-xs hover:border-blue-500 hover:text-blue-600 transition flex items-center space-x-1.5">
-              <span>â˜€ï¸</span>
-              <span>Solaire & Batteries</span>
+              <span>☀️</span>
+              <span>Solaire &amp; Batteries</span>
             </Link>
             <Link href="/emploi" className="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-xs hover:border-blue-500 hover:text-blue-600 transition flex items-center space-x-1.5">
-              <span>ðŸ’¼</span>
-              <span>Offres d'Emploi</span>
+              <span>💼</span>
+              <span>Offres d&apos;Emploi</span>
             </Link>
             <Link href="/hebergement-web" className="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-xs hover:border-blue-500 hover:text-blue-600 transition flex items-center space-x-1.5">
-              <span>âš¡</span>
+              <span>⚡</span>
               <span>Smart Hostinger (-20%)</span>
             </Link>
             <Link href="/gadgets-amazon" className="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-xs hover:border-blue-500 hover:text-blue-600 transition flex items-center space-x-1.5">
-              <span>ðŸ›’</span>
+              <span>🛒</span>
               <span>Tech Amazon</span>
             </Link>
           </div>
@@ -57,13 +57,13 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 pb-4 border-b border-slate-200">
           <div>
-            <span className="text-xs font-black uppercase tracking-wider text-blue-600">Ã€ la une aujourd'hui</span>
+            <span className="text-xs font-black uppercase tracking-wider text-blue-600">À la une aujourd&apos;hui</span>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
-              Derniers Guides & EnquÃªtes PubliÃ©s
+              Derniers Guides &amp; Enquêtes Publiés
             </h2>
           </div>
           <span className="text-xs text-slate-500 mt-2 sm:mt-0 font-medium">
-            Analyses & enquÃªtes documentÃ©es par notre rÃ©daction
+            Analyses &amp; enquêtes documentées par notre rédaction
           </span>
         </div>
 
@@ -82,12 +82,12 @@ export default function HomePage() {
       {/* All 33 Subdirectories (Chemins) Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-3 mb-12">
-          <span className="text-xs font-black uppercase tracking-wider text-blue-600">Exploration SilotÃ©e</span>
+          <span className="text-xs font-black uppercase tracking-wider text-blue-600">Exploration Silotée</span>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-            Les 33 Rubriques ThÃ©matiques du Portail
+            Les 33 Rubriques Thématiques du Portail
           </h2>
           <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto">
-            Chaque sous-dossier constitue un pÃ´le d'expertise dÃ©diÃ©, optimisÃ© pour les moteurs de recherche et l'expÃ©rience utilisateur.
+            Chaque sous-dossier constitue un pôle d&apos;expertise dédié, optimisé pour les moteurs de recherche et l&apos;expérience utilisateur.
           </p>
         </div>
 
@@ -117,7 +117,7 @@ export default function HomePage() {
                 <span className="text-[11px] font-semibold text-slate-500 truncate max-w-[190px]">
                   {cat.featuredTopic}
                 </span>
-                <span className="group-hover:translate-x-1 transition-transform">AccÃ©der â†’</span>
+                <span className="group-hover:translate-x-1 transition-transform">Accéder →</span>
               </div>
             </Link>
           ))}
@@ -128,25 +128,25 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-3xl bg-slate-900 text-white p-8 sm:p-12 shadow-xl border border-slate-800">
           <div className="max-w-3xl space-y-4">
-            <span className="text-xs font-black uppercase tracking-wider text-emerald-400">Garantie QualitÃ© & Transparence</span>
+            <span className="text-xs font-black uppercase tracking-wider text-emerald-400">Garantie Qualité &amp; Transparence</span>
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
-              Des contenus vÃ©rifiÃ©s sur le terrain, zÃ©ro promesse irrÃ©aliste.
+              Des contenus vérifiés sur le terrain, zéro promesse irréaliste.
             </h2>
             <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-              Nos enquÃªtes administratives s'appuient sur les textes de lois, dÃ©crets et barÃ¨mes officiels camerounais. Nos guides technologiques rÃ©sultent de tests rÃ©els en conditions tropicales et de benchmarks rigoureux.
+              Nos enquêtes administratives s&apos;appuient sur les textes de lois, décrets et barèmes officiels camerounais. Nos guides technologiques résultent de tests réels en conditions tropicales et de benchmarks rigoureux.
             </p>
             <div className="pt-4 flex flex-wrap gap-4 text-xs font-bold text-slate-300">
               <span className="flex items-center space-x-1.5 bg-slate-800 px-3 py-1.5 rounded-lg">
-                <span className="text-emerald-400">âœ“</span>
-                <span>Sources Officielles CitÃ©es</span>
+                <span className="text-emerald-400">✓</span>
+                <span>Sources Officielles Citées</span>
               </span>
               <span className="flex items-center space-x-1.5 bg-slate-800 px-3 py-1.5 rounded-lg">
-                <span className="text-emerald-400">âœ“</span>
-                <span>ConformitÃ© E-E-A-T Google</span>
+                <span className="text-emerald-400">✓</span>
+                <span>Conformité E-E-A-T Google</span>
               </span>
               <span className="flex items-center space-x-1.5 bg-slate-800 px-3 py-1.5 rounded-lg">
-                <span className="text-emerald-400">âœ“</span>
-                <span>Assistance WhatsApp RÃ©active</span>
+                <span className="text-emerald-400">✓</span>
+                <span>Assistance WhatsApp Réactive</span>
               </span>
             </div>
           </div>
@@ -155,4 +155,3 @@ export default function HomePage() {
     </div>
   );
 }
-
