@@ -58,7 +58,7 @@ export default function MentionsLegalesPage() {
 
         <h2 className="text-xl font-bold text-slate-900 pt-4">4. Responsabilité &amp; Avertissement</h2>
         <p>
-          Les informations, barèmes et démarches administratives diffusés sur ce site sont collectés auprès de sources officielles publiques et d&apos;observations de terrain. Kidenzo Media met tout en Å“uvre pour assurer l&apos;exactitude des renseignements au moment de leur mise en ligne. Toutefois, les réglementations gouvernementales, calendriers de concours et tarifs pouvant évoluer rapidement, l&apos;utilisateur est invité à vérifier la concordance auprès des administrations de référence. Les avis de tests d&apos;équipements reflètent l&apos;appréciation indépendante de notre équipe de testeurs.
+          Les informations, barèmes et démarches administratives diffusés sur ce site sont collectés auprès de sources officielles publiques et d&apos;observations de terrain. Kidenzo Media met tout en œuvre pour assurer l&apos;exactitude des renseignements au moment de leur mise en ligne. Toutefois, les réglementations gouvernementales, calendriers de concours et tarifs pouvant évoluer rapidement, l&apos;utilisateur est invité à vérifier la concordance auprès des administrations de référence. Les avis de tests d&apos;équipements reflètent l&apos;appréciation indépendante de notre équipe de testeurs.
         </p>
       </section>
     </div>

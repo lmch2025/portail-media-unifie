@@ -199,15 +199,6 @@ export const CATEGORIES: Category[] = [
     color: "from-blue-600 to-cyan-700"
   },
   {
-    slug: "univers-jeux-casino",
-    name: "Jeux & Casinos en Ligne",
-    description: "Stratégies prouvées pour jeux de crash Aviator/JetX, tableau de base du Blackjack et retraits Mobile Money.",
-    icon: "🎲",
-    blogNum: 22,
-    featuredTopic: "Jeux de Crash Aviator, Stratégie Blackjack",
-    color: "from-emerald-600 to-green-800"
-  },
-  {
     slug: "energie-solaire",
     name: "Énergie Solaire Cameroun",
     description: "Dimensionnement kits 3kVA pour frigo/congélateur, comparatif batteries Lithium LiFePO4 vs Gel et pompage agricole.",

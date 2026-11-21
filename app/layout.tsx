@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloatingBtn from "@/components/WhatsAppFloatingBtn";
+import CookieBanner from "@/components/CookieBanner";
 
 export const viewport: Viewport = {
   themeColor: "#2563eb",
@@ -22,6 +23,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.kidenzo.store",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/logo.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "Kidenzo Media | Guides Officiels, Concours, Énergie Solaire & Comparatifs Tech",
     description:
@@ -30,6 +40,14 @@ export const metadata: Metadata = {
     siteName: "Kidenzo Media",
     locale: "fr_FR",
     type: "website",
+    images: [
+      {
+        url: "/logo.png",
+        width: 512,
+        height: 512,
+        alt: "Kidenzo Media Logo Officiel",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -38,6 +56,7 @@ export const metadata: Metadata = {
       "Portail éditorial de référence : concours administratifs au Cameroun, démarches officielles, tarifs Eneo/Camwater, énergie solaire et tests d'équipements tech.",
     site: "@KidenzoMedia",
     creator: "@KidenzoMedia",
+    images: ["/logo.png"],
   },
   robots: {
     index: true,
@@ -66,6 +85,9 @@ export default function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth">
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3034343595064419"
@@ -77,6 +99,7 @@ export default function RootLayout({
         <main className="flex-grow">{children}</main>
         <Footer />
         <WhatsAppFloatingBtn />
+        <CookieBanner />
       </body>
     </html>
   );

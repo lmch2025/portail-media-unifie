@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { CATEGORIES } from "./categories";
 
 export type AffiliateType =
   | 'amazon_us'
@@ -77,7 +78,9 @@ export function getAllArticles(): ArticleIndexItem[] {
     const indexPath = path.join(getDataDir(), "articles-index.json");
     if (fs.existsSync(indexPath)) {
       const data = fs.readFileSync(indexPath, "utf-8");
-      cachedIndex = JSON.parse(data) as ArticleIndexItem[];
+      const validCategories = new Set(CATEGORIES.map((c) => c.slug));
+      const parsed = JSON.parse(data) as ArticleIndexItem[];
+      cachedIndex = parsed.filter((a) => validCategories.has(a.categorySlug));
       return cachedIndex;
     }
   } catch (error) {

@@ -9,19 +9,20 @@ export default function Footer() {
           {/* Brand & Mission */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center space-x-2.5">
-              <span className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-500 to-emerald-400 flex items-center justify-center text-white font-black text-xl">
-                P
+              <span className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white font-black text-xl shadow-md">
+                K
               </span>
               <span className="font-extrabold text-2xl tracking-tight text-white">
-                Portail<span className="text-blue-400">Unifié</span>
+                Kidenzo<span className="text-blue-400">Media</span>
               </span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
-              Portail média indépendant de référence. Guides officiels de concours, démarches administratives, analyses économiques CEMAC, comparatifs technologiques et tutoriels certifiés.
+              Portail média indépendant d&apos;information et de comparatifs de référence. Guides officiels de concours, démarches administratives, analyses économiques CEMAC, comparatifs technologiques et tutoriels certifiés.
             </p>
-            <div className="pt-2 text-xs text-slate-500">
-              <p>📍 Siège éditorial : Douala & Yaoundé, Cameroun</p>
-              <p>📞 Assistance Directe WhatsApp : +237 693 845 941</p>
+            <div className="pt-2 text-xs text-slate-500 space-y-1">
+              <p>📍 Siège éditorial : Douala (Littoral) &amp; Yaoundé (Centre), Cameroun</p>
+              <p>📞 Assistance Directe Rédaction : +237 693 845 941</p>
+              <p>✉️ Courriel officiel : contact@kidenzo.store</p>
             </div>
           </div>
 
@@ -32,10 +33,10 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="/concours" className="hover:text-blue-400 transition">Concours Administratifs</Link></li>
-              <li><Link href="/tarifs-demarches" className="hover:text-blue-400 transition">Tarifs Eneo & Camwater</Link></li>
-              <li><Link href="/emploi" className="hover:text-blue-400 transition">Offres d'Emploi & BTP</Link></li>
-              <li><Link href="/energie-solaire" className="hover:text-blue-400 transition">Énergie Solaire & Kits</Link></li>
-              <li><Link href="/foncier-terrains" className="hover:text-blue-400 transition">Titre Foncier & Terrains</Link></li>
+              <li><Link href="/tarifs-demarches" className="hover:text-blue-400 transition">Tarifs Eneo &amp; Camwater</Link></li>
+              <li><Link href="/emploi" className="hover:text-blue-400 transition">Offres d&apos;Emploi &amp; Stages</Link></li>
+              <li><Link href="/energie-solaire" className="hover:text-blue-400 transition">Énergie Solaire &amp; Kits</Link></li>
+              <li><Link href="/foncier-terrains" className="hover:text-blue-400 transition">Titre Foncier &amp; Terrains</Link></li>
               <li><Link href="/douane-ports" className="hover:text-blue-400 transition">Transit Port de Douala</Link></li>
             </ul>
           </div>
@@ -43,12 +44,12 @@ export default function Footer() {
           {/* Hub Tech & IA */}
           <div>
             <h4 className="font-bold text-white text-sm uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-              ⚡ Tech, IA & Outils
+              ⚡ Tech, IA &amp; Outils
             </h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/actualite-ia" className="hover:text-blue-400 transition">Actualités IA & Modèles</Link></li>
-              <li><Link href="/tutoriels-ia" className="hover:text-blue-400 transition">Tutoriels & Automatisation</Link></li>
-              <li><Link href="/statut-logiciels" className="hover:text-blue-400 transition">Pannes Logiciels & SaaS</Link></li>
+              <li><Link href="/actualite-ia" className="hover:text-blue-400 transition">Actualités IA &amp; Modèles</Link></li>
+              <li><Link href="/tutoriels-ia" className="hover:text-blue-400 transition">Tutoriels &amp; Automatisation</Link></li>
+              <li><Link href="/statut-logiciels" className="hover:text-blue-400 transition">Pannes Logiciels &amp; SaaS</Link></li>
               <li><Link href="/cybersecurite-web" className="hover:text-blue-400 transition">Cybersécurité Web</Link></li>
               <li><Link href="/hebergement-web" className="hover:text-blue-400 transition">Smart Hostinger (-20%)</Link></li>
               <li><Link href="/gadgets-amazon" className="hover:text-blue-400 transition">Gadgets Tech Amazon</Link></li>
@@ -58,10 +59,10 @@ export default function Footer() {
           {/* Hub Guides Pratiques */}
           <div>
             <h4 className="font-bold text-white text-sm uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
-              🧭 Guides & Vie
+              🧭 Guides &amp; Vie
             </h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/visas" className="hover:text-blue-400 transition">Visas Schengen & Canada</Link></li>
+              <li><Link href="/visas" className="hover:text-blue-400 transition">Visas Schengen &amp; Canada</Link></li>
               <li><Link href="/espresso-cafe" className="hover:text-blue-400 transition">Machines Espresso Guide</Link></li>
               <li><Link href="/sante-preventive" className="hover:text-blue-400 transition">Santé Préventive</Link></li>
               <li><Link href="/vie-de-couple" className="hover:text-blue-400 transition">Vie de Couple</Link></li>
@@ -71,10 +72,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Directory All 33 Categories */}
+        {/* Directory All 32 Clean Categories */}
         <div className="mt-12 pt-8 border-t border-slate-800">
           <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
-            Toutes les rubriques du portail (33 Thématiques Silotées) :
+            Toutes les rubriques d&apos;expertise de Kidenzo Media :
           </p>
           <div className="flex flex-wrap gap-2 text-xs">
             {CATEGORIES.map((c) => (
@@ -93,20 +94,20 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 space-y-4 md:space-y-0">
           <p>© {new Date().getFullYear()} Kidenzo Media. Tous droits réservés.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            <Link href="/a-propos" className="hover:text-blue-400 transition">
+            <Link href="/a-propos" className="hover:text-blue-400 transition font-medium">
               À Propos &amp; Équipe
             </Link>
-            <Link href="/mentions-legales" className="hover:text-blue-400 transition">
+            <Link href="/mentions-legales" className="hover:text-blue-400 transition font-medium">
               Mentions Légales
             </Link>
-            <Link href="/confidentialite" className="hover:text-blue-400 transition">
+            <Link href="/confidentialite" className="hover:text-blue-400 transition font-medium">
               Confidentialité &amp; RGPD
             </Link>
-            <Link href="/affiliation" className="hover:text-blue-400 transition">
-              Déclaration d&apos;Affiliation
+            <Link href="/affiliation" className="hover:text-blue-400 transition font-medium">
+              Transparence &amp; Affiliation
             </Link>
             <Link href="/contact" className="hover:text-blue-400 transition text-emerald-400 font-semibold">
-              Contact &amp; Assistance WhatsApp
+              Contact &amp; Assistance Rédaction
             </Link>
           </div>
         </div>

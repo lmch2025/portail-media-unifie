@@ -115,8 +115,6 @@ export default function ArticlePage({ params }: Props) {
       case "visas":
       case "voyages-monde":
         return "https://booking.stay22.com/kidenzo/oUVMZmBB6a";
-      case "univers-jeux-casino":
-        return "https://1win.com/casino?p=fsil";
       case "vie-de-couple":
         return "https://www.fonelove.com";
       case "sante-preventive":
@@ -828,6 +826,24 @@ export default function ArticlePage({ params }: Props) {
           className="prose-article"
           dangerouslySetInnerHTML={{ __html: article.contentHtml }}
         />
+
+        {/* Medical / Health Disclaimer for sante-preventive (E-E-A-T Compliance) */}
+        {article.categorySlug === "sante-preventive" && (
+          <aside
+            aria-label="Avertissement médical"
+            className="my-8 p-5 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl text-amber-900 text-sm leading-relaxed"
+          >
+            <div className="flex items-start space-x-3">
+              <span className="text-2xl shrink-0">⚠️</span>
+              <div>
+                <strong className="font-bold text-amber-950 block mb-1">
+                  Avertissement Médical &amp; Prévention Santé (E-E-A-T) :
+                </strong>
+                Les informations publiées dans cet article sont fournies à titre purement indicatif et préventif, basées sur des recommandations scientifiques publiques. Elles ne constituent en aucun cas une consultation, un diagnostic ou une prescription médicale. En cas de symptômes persistants ou de problème médical, consultez immédiatement un médecin ou un professionnel de santé qualifié.
+              </div>
+            </div>
+          </aside>
+        )}
 
         {/* GEO / AIO Structured HTML Reference Table for LLM Citations (ChatGPT, Perplexity, Google AI Overviews) */}
         {(() => {

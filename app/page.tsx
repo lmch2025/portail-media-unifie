@@ -84,7 +84,7 @@ export default function HomePage() {
         <div className="text-center space-y-3 mb-12">
           <span className="text-xs font-black uppercase tracking-wider text-blue-600">Exploration Silotée</span>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-            Les 33 Rubriques Thématiques du Portail
+            Les {CATEGORIES.length} Rubriques Thématiques de Kidenzo Media
           </h2>
           <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto">
             Chaque sous-dossier constitue un pôle d&apos;expertise dédié, optimisé pour les moteurs de recherche et l&apos;expérience utilisateur.
