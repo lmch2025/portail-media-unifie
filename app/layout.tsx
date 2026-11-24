@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloatingBtn from "@/components/WhatsAppFloatingBtn";
 import CookieBanner from "@/components/CookieBanner";
+import BlackFridayTopBar from "@/components/BlackFridayTopBar";
 
 export const viewport: Viewport = {
   themeColor: "#2563eb",
@@ -95,6 +96,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-900">
+        <BlackFridayTopBar />
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />

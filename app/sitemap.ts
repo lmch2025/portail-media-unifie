@@ -5,13 +5,19 @@ import { getAllArticles } from "@/lib/articles";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.kidenzo.store";
 
-  // Home route
+  // Home route & Strategic Campaign Hub
   const routes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/black-friday`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.95,
     },
   ];
 

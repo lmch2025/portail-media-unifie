@@ -1,12 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CATEGORIES } from "@/lib/categories";
+import { getBlackFridayPhase } from "@/lib/black-friday-schedule";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [bfActive, setBfActive] = useState(() => getBlackFridayPhase().isActive);
+
+  useEffect(() => {
+    setBfActive(getBlackFridayPhase(new Date()).isActive);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 transition-all shadow-xs">
@@ -34,6 +40,15 @@ export default function Header() {
             <Link href="/" className="px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-blue-600 transition-colors">
               Accueil
             </Link>
+            {bfActive && (
+              <Link
+                href="/black-friday"
+                className="px-3 py-2 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-950 font-black transition-colors flex items-center space-x-1 border border-amber-300"
+              >
+                <span>🔥</span>
+                <span>Black Friday</span>
+              </Link>
+            )}
             <Link href="/concours" className="px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-blue-600 transition-colors flex items-center space-x-1">
               <span>🎓</span>
               <span>Concours</span>
@@ -121,6 +136,15 @@ export default function Header() {
 
       {/* Mobile Quick Scroller */}
       <div className="lg:hidden border-t border-slate-100 bg-slate-50/90 overflow-x-auto py-2.5 px-4 flex space-x-2 text-xs font-semibold scrollbar-none">
+        {bfActive && (
+          <Link
+            href="/black-friday"
+            className="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-amber-400 border border-amber-500 text-slate-950 font-black flex items-center space-x-1 shadow-xs"
+          >
+            <span>🔥</span>
+            <span>Black Friday</span>
+          </Link>
+        )}
         <Link href="/" className="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 active:bg-blue-50 shadow-2xs">
           🏠 Accueil
         </Link>

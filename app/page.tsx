@@ -6,6 +6,7 @@ import { CATEGORIES } from "@/lib/categories";
 import { getFeaturedArticles } from "@/lib/articles";
 import ArticleCard from "@/components/ArticleCard";
 import HostingerBanner from "@/components/HostingerBanner";
+import BlackFridayHomeSpotlight from "@/components/BlackFridayHomeSpotlight";
 
 export default function HomePage() {
   const featured = getFeaturedArticles();
@@ -52,6 +53,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Planned Black Friday / Cyber Week Spotlight (Auto-expiring) */}
+      <BlackFridayHomeSpotlight />
 
       {/* Featured Articles Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
