@@ -6,6 +6,7 @@ import { getArticleBySlug, getAllArticles, getArticlesByCategory } from "@/lib/a
 import Breadcrumbs from "@/components/Breadcrumbs";
 import AmazonCashflowBox from "@/components/AmazonCashflowBox";
 import HostingerBanner from "@/components/HostingerBanner";
+import SafeImage from "@/components/SafeImage";
 
 // ─── ZÉRO FAST ORIGIN TRANSFER : pages 100% statiques au build ───────────────
 // revalidate=false + generateStaticParams = aucune requête serveur après deploy.
@@ -422,7 +423,7 @@ export default function ArticlePage({ params }: Props) {
 
           {/* Author Byline */}
           <div className="pt-2 flex items-center space-x-3">
-            <img
+            <SafeImage
               src={article.author?.avatar || "/logo.png"}
               alt={article.author?.name || "Kidenzo Media"}
               className="w-11 h-11 rounded-full object-cover border-2 border-white shadow-xs"
@@ -437,7 +438,7 @@ export default function ArticlePage({ params }: Props) {
         {/* Hero Product / Topic Image */}
         {article.featuredImage && (
           <figure className="my-6 rounded-2xl overflow-hidden border border-slate-200/80 shadow-md bg-slate-100">
-            <img
+            <SafeImage
               src={article.featuredImage}
               alt={article.title}
               className="w-full max-h-[480px] object-cover"

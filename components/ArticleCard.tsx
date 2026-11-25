@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Article, ArticleIndexItem } from "@/lib/articles";
 import { getCategoryBySlug } from "@/lib/categories";
+import SafeImage from "@/components/SafeImage";
 
 export default function ArticleCard({ article }: { article: Article | ArticleIndexItem }) {
   const category = getCategoryBySlug(article.categorySlug);
@@ -15,7 +16,7 @@ export default function ArticleCard({ article }: { article: Article | ArticleInd
             href={`/${article.categorySlug}/${article.slug}`}
             className="block relative aspect-[16/10] overflow-hidden rounded-xl bg-slate-100"
           >
-            <img
+            <SafeImage
               src={article.featuredImage}
               alt={article.title}
               loading="lazy"
@@ -60,7 +61,7 @@ export default function ArticleCard({ article }: { article: Article | ArticleInd
       {/* Author & Footer */}
       <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
         <div className="flex items-center space-x-2.5">
-          <img
+          <SafeImage
             src={article.author?.avatar || "/logo.png"}
             alt={article.author?.name || "Kidenzo Media"}
             className="w-8 h-8 rounded-full object-cover border border-slate-200"
